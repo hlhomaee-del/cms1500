@@ -1,0 +1,2132 @@
+<div class="artifact-thinking">
+This is a massive education tool. I need to create an interactive tool covering the CMS-1500 form with multiple sections, simulated forms, quizzes, and interactive elements. Let me build this systematically.
+</div>
+<div class="artifact-thinking">
+Given the size, I'll build this as a single HTML file with all CSS and JS inline, focusing on interactivity, visual appeal, and educational content about the CMS-1500 form.
+</div>
+<div class="artifact-thinking">
+Let me create the HTML file directly since I already reviewed the design guidelines from the previous task.
+</div>
+<div class="artifact-thinking">
+This is a very large file. I'll focus on making it functional, visually appealing, and educationally sound with all the key sections requested.
+</div>
+<div class="artifact-thinking">
+I need to be strategic about creating this file. It's going to be very large. I'll create it in parts using the file creation and editing tools.
+</div>
+Let me create this comprehensive CMS-1500 training tool.
+<div class="tool-call" tool="create_file">
+<param name="description">Create the CMS-1500 interactive training tool - comprehensive single HTML file</param>
+<param name="path">/home/claude/cms1500.html</param>
+<param name="file_content"><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CMS-1500 Claim Form Interactive Simulation Lab</title>
+<style>
+:root {
+  --primary: #2563eb;
+  --primary-light: #3b82f6;
+  --primary-dark: #1d4ed8;
+  --secondary: #7c3aed;
+  --accent: #f59e0b;
+  --accent2: #ec4899;
+  --accent3: #10b981;
+  --success: #22c563;
+  --error: #ef4444;
+  --warn: #f59e0b;
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface2: #f1f5f9;
+  --text: #1e293b;
+  --text2: #475569;
+  --text3: #94a8be;
+  --border: #e2e8f0;
+  --radius: 10px;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --shadow-lg: 0 4px 16px rgba(0,0,0,.1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.header{background:linear-gradient(135deg,var(--primary-dark),var(--primary),var(--secondary));color:#fff;padding:1rem;text-align:center;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(37,99,235,.3)}
+.header h1{font-size:clamp(.9rem,2.8vw,1.4rem);font-weight:800}
+.hstats{display:flex;justify-content:center;gap:1.2rem;margin-top:.4rem;font-size:.82rem;flex-wrap:wrap}
+.hstats span{display:flex;align-items:center;gap:.3rem}
+.pbar{width:100%;max-width:480px;margin:.5rem auto 0;background:rgba(255,255,255,.2);border-radius:20px;height:7px;overflow:hidden}
+.pbar-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--success));border-radius:20px;transition:width .5s;width:0%}
+.tabs{display:flex;overflow-x:auto;background:var(--surface);border-bottom:2px solid var(--border);padding:0 .3rem;scrollbar-width:thin}
+.tabs::-webkit-scrollbar{height:4px}
+.tabs::-webkit-scrollbar-thumb{background:var(--primary-light);border-radius:4px}
+.tab-btn{flex-shrink:0;padding:.65rem .8rem;border:none;background:none;font-size:.75rem;font-weight:600;color:var(--text2);cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;white-space:nowrap}
+.tab-btn:hover{color:var(--primary);background:rgba(37,99,235,.04)}
+.tab-btn.active{color:var(--primary);border-bottom-color:var(--primary)}
+.tab-btn.done{color:var(--success)}
+.tab-btn.done::after{content:' ✓'}
+.main{max-width:900px;margin:0 auto;padding:1.2rem .8rem 3rem}
+.sec{display:none;animation:fadeIn .3s}
+.sec.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card{background:var(--surface);border-radius:var(--radius);padding:1.3rem;margin-bottom:1.1rem;box-shadow:var(--shadow);border:1px solid var(--border)}
+.card-a{border-left:4px solid var(--primary)}
+.card-s{border-left:4px solid var(--success)}
+.card-w{border-left:4px solid var(--warn)}
+.card-i{border-left:4px solid var(--secondary)}
+h2{font-size:1.4rem;font-weight:800;margin-bottom:.8rem;color:var(--primary-dark)}
+h3{font-size:1.1rem;font-weight:700;margin-bottom:.6rem}
+h4{font-size:.95rem;font-weight:600;margin-bottom:.4rem;color:var(--text2)}
+p{margin-bottom:.6rem}
+.hl{background:linear-gradient(to right,#fef3c7,#fde68a);padding:.12em .4em;border-radius:4px;font-weight:600}
+.tag{display:inline-block;padding:.15em .5em;border-radius:16px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.tag-b{background:#dbeafe;color:#1d4ed8}
+.tag-p{background:#ede9fe;color:#6d28d9}
+.tag-g{background:#dcfce7;color:#15803d}
+.tag-r{background:#fee2e2;color:#b91c1c}
+.tag-y{background:#fef3c7;color:#92400e}
+.quiz{margin:1.1rem 0}
+.qq{font-weight:700;margin-bottom:.6rem;padding:.7rem;background:linear-gradient(135deg,#dbeafe,#ede9fe);border-radius:var(--radius);font-size:.92rem}
+.qopts{display:flex;flex-direction:column;gap:.4rem}
+.qo{padding:.65rem .9rem;border:2px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:all .2s;font-size:.88rem;background:var(--surface);text-align:left;font-weight:500}
+.qo:hover:not(.dis){border-color:var(--primary-light);background:#eff6ff;transform:translateX(3px)}
+.qo.ok{border-color:var(--success);background:#dcfce7;color:#15803d}
+.qo.no{border-color:var(--error);background:#fee2e2;color:#b91c1c}
+.qo.dis{cursor:default;opacity:.7}
+.qo.dis:hover{transform:none}
+.qfb{margin-top:.6rem;padding:.7rem;border-radius:var(--radius);font-size:.83rem;display:none}
+.qfb.show{display:block}
+.qfb.ok{background:#f0fdf4;border:1px solid #86efab;color:#15803d}
+.qfb.no{background:#fff1f2;border:1px solid #fca5a5;color:#b91c1c}
+.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.6rem 1.1rem;border:none;border-radius:var(--radius);font-size:.88rem;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-p{background:var(--primary);color:#fff}
+.btn-p:hover{background:var(--primary-dark);transform:translateY(-1px)}
+.btn-s{background:var(--surface2);color:var(--text);border:1px solid var(--border)}
+.btn-g{background:var(--success);color:#fff}
+.btn-a{background:var(--accent);color:#fff}
+.btn-a2{background:var(--accent2);color:#fff}
+.acc-item{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:.4rem;overflow:hidden}
+.acc-h{padding:.65rem .9rem;background:var(--surface2);cursor:pointer;font-weight:600;display:flex;justify-content:space-between;align-items:center;font-size:.9rem}
+.acc-h:hover{background:#e0e7ff}
+.acc-b{padding:0 .9rem;max-height:0;overflow:hidden;transition:all .3s}
+.acc-b.open{padding:.9rem;max-height:3000px}
+.form-field{display:flex;flex-direction:column;gap:.3rem;margin-bottom:.8rem}
+.form-field label{font-weight:600;font-size:.82rem;color:var(--text2)}
+.form-field input,.form-field select{padding:.5rem .7rem;border:2px solid var(--border);border-radius:6px;font-size:.88rem;transition:border .2s}
+.form-field input:focus,.form-field select:focus{outline:none;border-color:var(--primary)}
+.form-field input.correct{border-color:var(--success);background:#f0fdf4}
+.form-field input.wrong{border-color:var(--error);background:#fff1f2}
+.sim-card{background:linear-gradient(135deg,#1e40af,#3730a3);color:#fff;border-radius:12px;padding:1.2rem;margin:.8rem 0;font-size:.85rem;box-shadow:var(--shadow-lg);max-width:400px}
+.sim-card h4{color:#93c5fd;margin-bottom:.5rem;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em}
+.sim-card .row{display:flex;justify-content:space-between;margin:.3rem 0}
+.sim-card .lbl{opacity:.7;font-size:.75rem}
+.sim-card .val{font-weight:700}
+.sim-doc{background:#fffbeb;border:2px solid #fbbf24;border-radius:var(--radius);padding:1rem;margin:.8rem 0;font-size:.85rem}
+.sim-doc h4{color:#92400e;margin-bottom:.4rem}
+.cms-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.5rem;margin:.8rem 0}
+.cms-box{background:var(--surface);border:2px solid var(--border);border-radius:8px;padding:.7rem;cursor:pointer;transition:all .2s;text-align:center;font-size:.8rem}
+.cms-box:hover{border-color:var(--primary);transform:translateY(-2px);box-shadow:var(--shadow)}
+.cms-box.sel{border-color:var(--primary);background:#eff6ff}
+.cms-box .bnum{font-weight:800;font-size:1rem;color:var(--primary)}
+.cms-box .bdesc{color:var(--text2);font-size:.73rem;margin-top:.2rem}
+.badge{display:flex;align-items:center;gap:.3rem;padding:.4rem .6rem;border-radius:16px;font-size:.78rem;font-weight:600;border:2px solid var(--border);opacity:.4;transition:all .3s}
+.badge.earned{opacity:1;border-color:var(--accent);background:#fffbeb;animation:bpop .5s}
+@keyframes bpop{50%{transform:scale(1.1)}}
+.badges{display:flex;flex-wrap:wrap;gap:.6rem;margin:.8rem 0}
+.timer{font-size:1.8rem;font-weight:800;text-align:center;font-variant-numeric:tabular-nums;color:var(--primary-dark)}
+.timer.warn{color:var(--warn)}
+.timer.danger{color:var(--error);animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.5}}
+.toast{position:fixed;bottom:16px;right:16px;padding:.6rem 1rem;border-radius:var(--radius);color:#fff;font-weight:600;font-size:.85rem;z-index:200;box-shadow:var(--shadow-lg);animation:slideU .3s,fadeO .3s 2s forwards}
+@keyframes slideU{from{transform:translateY(16px);opacity:0}}
+@keyframes fadeO{to{opacity:0;transform:translateY(-8px)}}
+.footer{text-align:center;padding:1.5rem .8rem;background:var(--surface);border-top:1px solid var(--border);color:var(--text2);font-size:.82rem}
+.footer strong{color:var(--primary)}
+.tooltip{position:relative;border-bottom:2px dotted var(--primary-light);cursor:help;font-weight:600;color:var(--primary-dark)}
+.tooltip:hover::after{content:attr(data-tip);position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:var(--text);color:#fff;padding:.4rem .6rem;border-radius:6px;font-size:.73rem;font-weight:400;white-space:normal;max-width:240px;z-index:50;min-width:150px}
+.flash{background:var(--surface);border:2px solid var(--primary-light);border-radius:var(--radius);padding:1.2rem;text-align:center;min-height:100px;display:flex;flex-direction:column;justify-content:center;cursor:pointer;transition:all .3s;margin-bottom:.8rem}
+.flash:hover{box-shadow:var(--shadow-lg)}
+.inline-form{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.6rem;padding:.8rem;background:var(--surface2);border-radius:var(--radius);margin:.6rem 0}
+@media(max-width:600px){.tab-btn{font-size:.68rem;padding:.5rem .6rem}.card{padding:.9rem}h2{font-size:1.2rem}.cms-grid{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}.inline-form{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="header">
+<h1>📋 CMS-1500 Claim Form Interactive Simulation Lab</h1>
+<div class="hstats">
+<span>⭐ Score: <b id="score">0</b></span>
+<span>🔥 Streak: <b id="streak">0</b></span>
+<span>🏅 Badges: <b id="badgeCt">0</b>/8</span>
+</div>
+<div class="pbar"><div class="pbar-fill" id="pbar"></div></div>
+</header>
+<nav class="tabs" id="tabs">
+<button class="tab-btn active" onclick="showSec(0)">1. Welcome</button>
+<button class="tab-btn" onclick="showSec(1)">2. Meet CMS-1500</button>
+<button class="tab-btn" onclick="showSec(2)">3. Blocks 1-13</button>
+<button class="tab-btn" onclick="showSec(3)">4. Blocks 14-24</button>
+<button class="tab-btn" onclick="showSec(4)">5. Charges</button>
+<button class="tab-btn" onclick="showSec(5)">6. Blocks 25-33</button>
+<button class="tab-btn" onclick="showSec(6)">7. Sim Lab</button>
+<button class="tab-btn" onclick="showSec(7)">8. Full Claim</button>
+<button class="tab-btn" onclick="showSec(8)">9. Timed Quiz</button>
+<button class="tab-btn" onclick="showSec(9)">10. Review</button>
+</nav>
+<main class="main">
+<!-- SEC 0: Welcome -->
+<div class="sec active" id="s0">
+<div class="card card-a">
+<h2>Welcome to the CMS-1500 Simulation Lab!</h2>
+<p>This interactive lab teaches you how to <b>complete a CMS-1500 claim form</b> like a real medical billing professional. You'll learn by doing — filling in fields, reading insurance cards, and making real decisions.</p>
+<div style="display:flex;gap:.4rem;flex-wrap:wrap;margin:.7rem 0">
+<span class="tag tag-b">Hands-On</span><span class="tag tag-p">Simulation</span><span class="tag tag-g">Scored</span><span class="tag tag-r">Exam-Ready</span>
+</div>
+</div>
+<div class="card">
+<h3>How This Lab Works</h3>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">📋 Work through each tab in order <span>+</span></div><div class="acc-b">Each section builds on the last. Start at Tab 1 and go in order. You can always go back to review.</div></div>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">⭐ Earn points for correct answers <span>+</span></div><div class="acc-b">Every correct answer earns 10 points. Build streaks for bonus points. Read all explanations even when you get it right!</div></div>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">📝 Practice filling in form fields <span>+</span></div><div class="acc-b">Several sections have simulated form fields. Type your answer and check it. This mimics real-world claim entry.</div></div>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">⏱ Timed challenge at the end <span>+</span></div><div class="acc-b">After learning all sections, test yourself in Tab 9. It pulls questions from everything you've learned.</div></div>
+</div>
+<div class="badges" id="badgeArea">
+<div class="badge" id="b-welcome">🌟 Getting Started</div>
+<div class="badge" id="b-form">📋 Form Explorer</div>
+<div class="badge" id="b-patient">🪪 Patient Pro</div>
+<div class="badge" id="b-clinical">🏥 Clinical Coder</div>
+<div class="badge" id="b-charges">💰 Charge Master</div>
+<div class="badge" id="b-provider">🩺 Provider Expert</div>
+<div class="badge" id="b-sim">🔬 Sim Star</div>
+<div class="badge" id="b-timed">⚡ Speed Biller</div>
+</div>
+<div style="text-align:center;margin-top:1.2rem">
+<button class="btn btn-p" onclick="showSec(1);earnBadge('welcome')" style="font-size:1rem;padding:.8rem 1.8rem">🚀 Start Learning</button>
+</div>
+</div>
+<!-- SEC 1: Meet CMS-1500 -->
+<div class="sec" id="s1">
+<h2>Meet the CMS-1500 Form</h2>
+<div class="quiz" id="q_m0"></div>
+<div id="m_info" style="display:none">
+<div class="card card-i">
+<h3>What is the CMS-1500?</h3>
+<p>The <b>CMS-1500</b> (also called the HCFA-1500) is the <span class="hl">standard paper claim form</span> used to bill Medicare, Medicaid, and most commercial insurance carriers for professional (non-facility) services.</p>
+<p><b>Current version:</b> CMS-1500 (02/12)</p>
+<p>Even though most claims are submitted electronically, the CMS-1500 is the visual standard that maps to the electronic 837P transaction. As a biller, you need to know every box.</p>
+</div>
+<div class="card">
+<h3>The Three Sections</h3>
+<p>The form has <b>33 numbered boxes</b> organized into three main areas:</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.6rem;margin:.6rem 0">
+<div style="background:#dbeafe;padding:.8rem;border-radius:8px;border-left:4px solid var(--primary)"><b>Boxes 1–13</b><br>Patient & Insurance Info<br><small style="color:var(--text2)">Who is the patient? Who is paying?</small></div>
+<div style="background:#ede9fe;padding:.8rem;border-radius:8px;border-left:4px solid var(--secondary)"><b>Boxes 14–24</b><br>Clinical & Services<br><small style="color:var(--text2)">What happened? What was done?</small></div>
+<div style="background:#dcfce7;padding:.8rem;border-radius:8px;border-left:4px solid var(--accent3)"><b>Boxes 25–33</b><br>Provider & Billing<br><small style="color:var(--text2)">Who did it? Where? How to pay?</small></div>
+</div>
+</div>
+<div class="card">
+<h3>🖱 Click a Block to Learn About It</h3>
+<p>Tap any block below to see what goes there.</p>
+<div class="cms-grid" id="cmsGrid"></div>
+<div id="boxDetail" class="card card-a" style="display:none"></div>
+</div>
+<div class="quiz" id="q_m1"></div>
+<div class="quiz" id="q_m2"></div>
+<div class="quiz" id="q_m3"></div>
+<div id="m_done" style="display:none" class="card card-s">
+<h3>✅ Section Complete!</h3>
+<p>You now know the CMS-1500's three sections and purpose. Next, let's dive into the patient and insurance blocks.</p>
+<button class="btn btn-p" onclick="showSec(2);earnBadge('form')">Continue to Blocks 1–13 →</button>
+</div>
+</div>
+</div>
+<!-- SEC 2: Blocks 1-13 -->
+<div class="sec" id="s2">
+<h2>Patient & Insurance Blocks (1–13)</h2>
+<div class="card card-i">
+<h3>Where Does This Info Come From?</h3>
+<p>Blocks 1–13 come from two main sources:</p>
+<p>📋 <b>Patient registration/demographic form</b> — name, DOB, address, etc.</p>
+<p>🪪 <b>Insurance card</b> — plan name, ID number, group number, etc.</p>
+<p>⚠️ Not everything on the insurance card goes on the claim. You must know <b>what goes where</b>.</p>
+</div>
+<div class="sim-card" id="sampleInsCard">
+<h4>🪪 Sample Insurance Card</h4>
+<div class="row"><span class="lbl">Plan</span><span class="val">BlueCross BlueShield</span></div>
+<div class="row"><span class="lbl">Member</span><span class="val">JOHNSON, MARIA T</span></div>
+<div class="row"><span class="lbl">Member ID</span><span class="val">BCB882461035</span></div>
+<div class="row"><span class="lbl">Group #</span><span class="val">GRP-7742</span></div>
+<div class="row"><span class="lbl">DOB</span><span class="val">03/15/1985</span></div>
+<div class="row"><span class="lbl">Copay</span><span class="val">$30 Office / $250 ER</span></div>
+<div class="row"><span class="lbl">RxBin</span><span class="val">004336</span></div>
+<div class="row"><span class="lbl">Effective</span><span class="val">01/01/2024</span></div>
+</div>
+<div class="card">
+<h3>Practice: Read the Card and Fill In</h3>
+<p>Using the insurance card above, fill in the correct CMS-1500 fields.</p>
+<div id="cardFields"></div>
+<button class="btn btn-p" onclick="checkCardFields()" id="checkCardBtn">✓ Check My Answers</button>
+<div id="cardFeedback" style="margin-top:.6rem"></div>
+</div>
+<div class="quiz" id="q_p1"></div>
+<div class="quiz" id="q_p2"></div>
+<div class="quiz" id="q_p3"></div>
+<div class="quiz" id="q_p4"></div>
+<div class="quiz" id="q_p5"></div>
+<div id="p_done" style="display:none" class="card card-s">
+<h3>✅ Section Complete!</h3>
+<p>You can now read an insurance card and fill in patient/insurance blocks correctly.</p>
+<button class="btn btn-p" onclick="showSec(3);earnBadge('patient')">Continue to Blocks 14–24 →</button>
+</div>
+</div>
+<!-- SEC 3: Blocks 14-24 -->
+<div class="sec" id="s3">
+<h2>Clinical & Service Blocks (14–24)</h2>
+<div class="card card-i">
+<h3>The Heart of the Claim</h3>
+<p>Boxes 14–24 tell the payer <b>what happened clinically</b> and <b>what services were provided</b>. This is where medical necessity lives.</p>
+</div>
+<div class="card">
+<h3>Key Blocks in This Section</h3>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">Box 14: Date of Current Illness/Injury <span>+</span></div><div class="acc-b">Enter the date the patient's current condition started. Found in the provider's note or history. Use MM/DD/YYYY format.</div></div>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">Box 17: Referring Provider <span>+</span></div><div class="acc-b">Name of the referring or ordering provider, if applicable. Not always required — only when another provider referred the patient.</div></div>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">Box 21: Diagnosis Codes (ICD-10-CM) <span>+</span></div><div class="acc-b">Up to 12 diagnosis codes that justify the services. Listed with pointers A–L. These come from the provider's documentation.</div></div>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">Box 24: Service Lines <span>+</span></div><div class="acc-b">The most important area. Each line includes: Date of Service (24A), Place of Service (24B), CPT/HCFA code (24D), Diagnosis Pointer (24E), Charges (24F), Units (24G).</div></div>
+</div>
+<div class="sim-doc">
+<h4>📄 Sample Provider Note Excerpt</h4>
+<p><b>Date of Service:</b> 03/10/2025</p>
+<p><b>Chief Complaint:</b> Sore throat and fever for 3 days</p>
+<p><b>History:</b> Patient also has a history of hypertension (controlled) and seasonal allergies. Smokes 1 pack/day.</p>
+<p><b>Assessment:</b> Acute pharyngitis (J02.9)</p>
+<p><b>Plan:</b> Rapid strep test performed. Prescribed amoxicillin. Follow up in 1 week if no improvement.</p>
+<p><b>Procedure:</b> Office visit, established patient, level 3 (99213). Rapid strep test (87880).</p>
+<p><b>Place of Service:</b> Office (11)</p>
+</div>
+<div class="card">
+<h3>Practice: Identify What Goes on the Claim</h3>
+<p>From the note above, which diagnoses should be reported on the CMS-1500?</p>
+</div>
+<div class="quiz" id="q_c1"></div>
+<div class="quiz" id="q_c2"></div>
+<div class="quiz" id="q_c3"></div>
+<div class="quiz" id="q_c4"></div>
+<div class="quiz" id="q_c5"></div>
+<div class="quiz" id="q_c6"></div>
+<div id="c_done" style="display:none" class="card card-s">
+<h3>✅ Section Complete!</h3>
+<p>You can now read a provider note and pick out what belongs in the clinical and service blocks.</p>
+<button class="btn btn-p" onclick="showSec(4);earnBadge('clinical')">Continue to Charges →</button>
+</div>
+</div>
+<!-- SEC 4: Charges -->
+<div class="sec" id="s4">
+<h2>Charges & Totals (Box 24F / 28)</h2>
+<div class="card card-i">
+<h3>Getting the Money Right</h3>
+<p>Each service line in Box 24 has a charge amount in <b>Box 24F</b>. Box 28 is the <b>total of all charges</b>. Getting this wrong = claim issues.</p>
+</div>
+<div class="card">
+<h3>Practice: Calculate Charges</h3>
+<p>A patient had the following services on 03/10/2025:</p>
+<table style="width:100%;border-collapse:collapse;margin:.6rem 0;font-size:.85rem">
+<tr style="background:var(--surface2)"><th style="padding:.5rem;text-align:left;border:1px solid var(--border)">CPT</th><th style="padding:.5rem;text-align:left;border:1px solid var(--border)">Description</th><th style="padding:.5rem;text-align:right;border:1px solid var(--border)">Units</th><th style="padding:.5rem;text-align:right;border:1px solid var(--border)">Charge</th></tr>
+<tr><td style="padding:.5rem;border:1px solid var(--border)">99213</td><td style="padding:.5rem;border:1px solid var(--border)">Office visit, est., level 3</td><td style="padding:.5rem;text-align:right;border:1px solid var(--border)">1</td><td style="padding:.5rem;text-align:right;border:1px solid var(--border)">$110.00</td></tr>
+<tr><td style="padding:.5rem;border:1px solid var(--border)">87880</td><td style="padding:.5rem;border:1px solid var(--border)">Rapid strep test</td><td style="padding:.5rem;text-align:right;border:1px solid var(--border)">1</td><td style="padding:.5rem;text-align:right;border:1px solid var(--border)">$25.00</td></tr>
+<tr><td style="padding:.5rem;border:1px solid var(--border)">36415</td><td style="padding:.5rem;border:1px solid var(--border)">Venipuncture</td><td style="padding:.5rem;text-align:right;border:1px solid var(--border)">1</td><td style="padding:.5rem;text-align:right;border:1px solid var(--border)">$15.00</td></tr>
+</table>
+<div class="form-field">
+<label>What is the total charge for Box 28?</label>
+<input type="text" id="chargeCalc" placeholder="Enter amount (e.g. 150.00)">
+</div>
+<button class="btn btn-p" onclick="checkCharge()">Check Answer</button>
+<div id="chargeFb" class="qfb" style="margin-top:.5rem"></div>
+</div>
+<div class="quiz" id="q_ch1"></div>
+<div class="quiz" id="q_ch2"></div>
+<div class="quiz" id="q_ch3"></div>
+<div class="quiz" id="q_ch4"></div>
+<div id="ch_done" style="display:none" class="card card-s">
+<h3>✅ Section Complete!</h3>
+<p>You understand how charges are entered and totaled on the CMS-1500.</p>
+<button class="btn btn-p" onclick="showSec(5);earnBadge('charges')">Continue to Provider Blocks →</button>
+</div>
+</div>
+<!-- SEC 5: Provider Blocks -->
+<div class="sec" id="s5">
+<h2>Provider & Billing Blocks (25–33)</h2>
+<div class="card card-i">
+<h3>Who Did the Work?</h3>
+<p>Boxes 25–33 identify the <b>provider</b>, <b>practice</b>, and <b>billing entity</b>. These come from the provider's office records, not the patient.</p>
+</div>
+<div class="card">
+<h3>Key Blocks</h3>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">Box 25: Federal Tax ID / EIN <span>+</span></div><div class="acc-b">The provider's or practice's federal tax ID number. Usually an EIN (Employer Identification Number). Check the box for SSN or EIN.</div></div>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">Box 26: Patient Account Number <span>+</span></div><div class="acc-b">Optional. The practice's internal account number for the patient. Helps match the remittance to the patient.</div></div>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">Box 27: Accept Assignment <span>+</span></div><div class="acc-b">Does the provider accept the insurance's allowed amount as payment in full? "Yes" for participating providers.</div></div>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">Box 31: Signature of Provider <span>+</span></div><div class="acc-b">The rendering provider's signature and date. In electronic claims, "Signature on File" is often used.</div></div>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">Box 32: Service Facility Location <span>+</span></div><div class="acc-b">The name and address of where the service was performed. May differ from the billing address.</div></div>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">Box 33: Billing Provider Info & NPI <span>+</span></div><div class="acc-b">The name, address, phone, and NPI of the billing provider or practice. This is where the payment gets sent.</div></div>
+</div>
+<div class="sim-doc">
+<h4>🏥 Sample Provider Office Information Sheet</h4>
+<p><b>Practice:</b> Sunrise Family Medicine</p>
+<p><b>Address:</b> 450 Healthcare Blvd, Suite 200, Tampa, FL 33602</p>
+<p><b>Phone:</b> (813) 555-0142</p>
+<p><b>EIN:</b> 59-3847261</p>
+<p><b>Billing NPI:</b> 1234567890</p>
+<p><b>Rendering Provider:</b> Dr. Sarah Chen, MD</p>
+<p><b>Rendering NPI:</b> 9876543210</p>
+<p><b>Accepts Assignment:</b> Yes</p>
+<p><b>Office Manager:</b> Tom Rivera</p>
+<p><b>Fax:</b> (813) 555-0143</p>
+</div>
+<div class="card">
+<h3>Practice: Fill In Provider Blocks</h3>
+<div id="provFields"></div>
+<button class="btn btn-p" onclick="checkProvFields()">✓ Check My Answers</button>
+<div id="provFeedback" style="margin-top:.6rem"></div>
+</div>
+<div class="quiz" id="q_pr1"></div>
+<div class="quiz" id="q_pr2"></div>
+<div id="pr_done" style="display:none" class="card card-s">
+<h3>✅ Section Complete!</h3>
+<p>You can now fill in the provider and billing section of the CMS-1500.</p>
+<button class="btn btn-p" onclick="showSec(6);earnBadge('provider')">Continue to Simulation Lab →</button>
+</div>
+</div>
+<!-- SEC 6: Simulation Lab -->
+<div class="sec" id="s6">
+<h2>🔬 Source Document Simulation Lab</h2>
+<div class="card card-w">
+<h3>Think Like a Biller</h3>
+<p>Below is a complete set of source documents for a patient encounter. Your job: figure out <b>what information goes on the CMS-1500</b> and what does <b>NOT</b>. Some information is a distractor!</p>
+</div>
+<div class="sim-card">
+<h4>🪪 Insurance Card</h4>
+<div class="row"><span class="lbl">Plan</span><span class="val">Aetna PPO</span></div>
+<div class="row"><span class="lbl">Member</span><span class="val">DAVIS, ROBERT A</span></div>
+<div class="row"><span class="lbl">Member ID</span><span class="val">AET-990321478</span></div>
+<div class="row"><span class="lbl">Group #</span><span class="val">EMP-5521</span></div>
+<div class="row"><span class="lbl">DOB</span><span class="val">07/22/1978</span></div>
+<div class="row"><span class="lbl">Copay</span><span class="val">$40 Specialist</span></div>
+<div class="row"><span class="lbl">PCP</span><span class="val">Dr. Williams</span></div>
+</div>
+<div class="sim-doc">
+<h4>📋 Patient Demographics</h4>
+<p><b>Name:</b> Robert A. Davis</p>
+<p><b>DOB:</b> 07/22/1978 &nbsp; <b>Sex:</b> Male</p>
+<p><b>Address:</b> 312 Oak Lane, Tampa, FL 33610</p>
+<p><b>Phone:</b> (813) 555-9021</p>
+<p><b>Emergency Contact:</b> Lisa Davis (wife) — (813) 555-9022</p>
+<p><b>Employer:</b> Tampa Bay Shipping Co.</p>
+<p><b>Relationship to Insured:</b> Self</p>
+<p><b>Favorite Color:</b> Blue</p>
+</div>
+<div class="sim-doc">
+<h4>📄 Provider Note</h4>
+<p><b>DOS:</b> 04/02/2025 &nbsp; <b>POS:</b> Office (11)</p>
+<p><b>CC:</b> Low back pain for 2 weeks, started after lifting heavy boxes at work on 03/19/2025.</p>
+<p><b>History:</b> Patient is a smoker. Has history of GERD. Takes omeprazole daily. Enjoys fishing on weekends.</p>
+<p><b>Assessment:</b> Lumbago (M54.5)</p>
+<p><b>Plan:</b> X-ray lumbar spine. Prescribed ibuprofen. Follow up in 2 weeks.</p>
+<p><b>Procedures:</b><br>99214 — Office visit, est., level 4 — $155.00<br>72100 — X-ray lumbar spine, 2-3 views — $85.00</p>
+</div>
+<div class="card">
+<h3>Which of These Go on the Claim?</h3>
+<p>Select all items that belong on the CMS-1500 for this encounter.</p>
+<div id="simCheckItems"></div>
+<button class="btn btn-p" onclick="checkSimItems()" style="margin-top:.6rem">✓ Check Selections</button>
+<div id="simFeedback" style="margin-top:.6rem"></div>
+</div>
+<div class="quiz" id="q_s1"></div>
+<div class="quiz" id="q_s2"></div>
+<div class="quiz" id="q_s3"></div>
+<div id="sim_done" style="display:none" class="card card-s">
+<h3>✅ Section Complete!</h3>
+<p>You can identify relevant vs. irrelevant information from source documents — a critical billing skill!</p>
+<button class="btn btn-p" onclick="showSec(7);earnBadge('sim')">Continue to Full Claim Challenge →</button>
+</div>
+</div>
+<!-- SEC 7: Full Claim Challenge -->
+<div class="sec" id="s7">
+<h2>📝 Full Claim Completion Challenge</h2>
+<div class="card card-w">
+<h3>Complete the Entire CMS-1500</h3>
+<p>Using the documents below, fill in all the required fields. This simulates real claim entry!</p>
+</div>
+<div class="sim-card">
+<h4>🪪 Insurance Card</h4>
+<div class="row"><span class="lbl">Plan</span><span class="val">United Healthcare</span></div>
+<div class="row"><span class="lbl">Member</span><span class="val">MARTINEZ, ELENA R</span></div>
+<div class="row"><span class="lbl">Member ID</span><span class="val">UHC-445896201</span></div>
+<div class="row"><span class="lbl">Group #</span><span class="val">FL-8834</span></div>
+<div class="row"><span class="lbl">DOB</span><span class="val">11/03/1990</span></div>
+</div>
+<div class="sim-doc">
+<h4>📋 Patient Info</h4>
+<p><b>Name:</b> Elena R. Martinez &nbsp; <b>DOB:</b> 11/03/1990 &nbsp; <b>Sex:</b> Female</p>
+<p><b>Address:</b> 785 Palm Ave, Orlando, FL 32801</p>
+<p><b>Relationship to insured:</b> Self</p>
+</div>
+<div class="sim-doc">
+<h4>📄 Provider Note — DOS: 04/05/2025</h4>
+<p><b>CC:</b> Annual wellness exam</p>
+<p><b>Assessment:</b> Encounter for general adult medical exam (Z00.00)</p>
+<p><b>Procedures:</b><br>99395 — Preventive visit, est., 18-39 — $195.00</p>
+<p><b>POS:</b> Office (11)</p>
+</div>
+<div class="sim-doc">
+<h4>🏥 Provider Info</h4>
+<p><b>Practice:</b> Orlando Wellness Center</p>
+<p><b>Address:</b> 200 Health Park Dr, Orlando, FL 32806</p>
+<p><b>Phone:</b> (407) 555-0188</p>
+<p><b>EIN:</b> 58-2938471</p>
+<p><b>Billing NPI:</b> 1122334455</p>
+<p><b>Rendering:</b> Dr. James Park, MD &nbsp; <b>NPI:</b> 5566778899</p>
+</div>
+<div class="card">
+<h3>Fill In the Claim</h3>
+<div id="fullClaimFields"></div>
+<button class="btn btn-a2" onclick="checkFullClaim()" style="margin-top:.6rem;font-size:.95rem">📋 Submit & Check Claim</button>
+<div id="fullClaimFb" style="margin-top:.8rem"></div>
+</div>
+</div>
+<!-- SEC 8: Timed Quiz -->
+<div class="sec" id="s8">
+<h2>⏱ Timed CMS-1500 Quiz</h2>
+<div id="timedStart" class="card" style="text-align:center">
+<h3>Ready for the Challenge?</h3>
+<p>20 questions. 10 minutes. Let's see what you've learned!</p>
+<p style="margin:.8rem 0"><b>Best Score: <span id="bestTimedScore">0</span>/20</b></p>
+<button class="btn btn-a2" onclick="startTimed()" style="font-size:1rem;padding:.8rem 1.6rem">⚡ Start Challenge</button>
+</div>
+<div id="timedActive" style="display:none">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem">
+<div class="timer" id="timerDisp">10:00</div>
+<div><b>Score: <span id="timedScore">0</span>/20</b> 🔥<span id="timedStreak">0</span></div>
+</div>
+<div id="timedQ" class="card"></div>
+</div>
+<div id="timedResults" style="display:none" class="card">
+<h3>Challenge Complete!</h3>
+<div id="timedResCont"></div>
+<button class="btn btn-p" onclick="startTimed()" style="margin-top:.8rem">🔄 Try Again</button>
+<button class="btn btn-s" onclick="showSec(9)" style="margin-top:.8rem">Review Cards →</button>
+</div>
+</div>
+<!-- SEC 9: Review -->
+<div class="sec" id="s9">
+<h2>📝 Rapid Review</h2>
+<div class="card card-i"><p>Click each card to reveal the answer. These are the most tested concepts!</p></div>
+<div id="flashCont"></div>
+<div class="card" style="text-align:center;margin-top:1rem">
+<h3>🎓 You've Completed the Lab!</h3>
+<p>Go back and review any sections. Good luck on your CBSE exam!</p>
+<button class="btn btn-p" onclick="showSec(0)">Back to Home</button>
+</div>
+</div>
+</main>
+<footer class="footer">
+<p>Developed and Instructed by <strong>Simone Leigh</strong></p>
+<p style="margin-top:.2rem;font-size:.72rem;color:var(--text3)">CMS-1500 Claim Form Interactive Simulation Lab</p>
+</footer>
+<script>
+// === STATE ===
+let S={score:0,streak:0,best:0,badges:{},answered:{},timedBest:0};
+function showSec(i){document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));document.getElementById('s'+i).classList.add('active');document.querySelectorAll('.tab-btn').forEach((b,j)=>b.classList.toggle('active',j===i));window.scrollTo({top:0})}
+function addScore(n){S.score+=n;S.streak++;if(S.streak>S.best)S.best=S.streak;$('score').textContent=S.score;$('streak').textContent=S.streak;if(S.streak>0&&S.streak%5===0)toast('🔥 '+S.streak+' streak!','var(--accent)');updPbar()}
+function resetStreak(){S.streak=0;$('streak').textContent=0}
+function earnBadge(id){if(S.badges[id])return;S.badges[id]=true;let el=$('b-'+id);if(el)el.classList.add('earned');$('badgeCt').textContent=Object.keys(S.badges).length;toast('🏅 Badge Earned!','var(--secondary)')}
+function updPbar(){let t=Object.keys(S.answered).length;$('pbar').style.width=Math.min(100,t/60*100)+'%'}
+function toast(m,c){let t=document.createElement('div');t.className='toast';t.style.background=c||'var(--primary)';t.textContent=m;document.body.appendChild(t);setTimeout(()=>t.remove(),2500)}
+function toggleAcc(el){let b=el.nextElementSibling;let o=b.classList.toggle('open');el.querySelector('span').textContent=o?'−':'+'}
+function $(id){return document.getElementById(id)}
+
+// === QUIZ BUILDER ===
+function mkQuiz(cid,q,cb){let c=$(cid);if(!c)return;let h='<div class="qq">'+q.q+'</div><div class="qopts">';q.o.forEach((o,i)=>{h+='<button class="qo" onclick="handleQ(this,\''+cid+'\','+q.a+','+i+')">'+o+'</button>'});h+='</div><div class="qfb" id="'+cid+'_fb"></div>';c.innerHTML=h;c._q=q;c._cb=cb}
+function handleQ(btn,cid,a,ch){if(S.answered[cid])return;S.answered[cid]=true;let c=$(cid);c.querySelectorAll('.qo').forEach((b,i)=>{b.classList.add('dis');if(i===a)b.classList.add('ok');if(i===ch&&i!==a)b.classList.add('no')});let fb=$(cid+'_fb'),q=c._q;if(ch===a){fb.className='qfb show ok';fb.innerHTML='✅ Correct! +10 points<br>'+(q.r||'');addScore(10)}else{fb.className='qfb show no';fb.innerHTML='❌ Not quite. '+(q.r||'');resetStreak()}if(c._cb)c._cb()}
+
+// === SEC 1: Meet CMS-1500 ===
+const boxInfo=[
+{n:1,t:'Insurance Type',d:'Check the type of insurance (Medicare, Medicaid, etc.).'},
+{n:'1a',t:'Insured ID',d:'The insured\'s ID number from the insurance card.'},
+{n:2,t:'Patient Name',d:'Patient\'s last name, first name, middle initial.'},
+{n:3,t:'Patient DOB/Sex',d:'Patient date of birth and sex (M/F).'},
+{n:4,t:'Insured Name',d:'Name of the insured person (may differ from patient).'},
+{n:5,t:'Patient Address',d:'Patient\'s mailing address, city, state, zip, phone.'},
+{n:6,t:'Patient Relationship',d:'Patient\'s relationship to insured (Self, Spouse, Child, Other).'},
+{n:7,t:'Insured Address',d:'Insured\'s address (if different from patient).'},
+{n:8,t:'Reserved',d:'Reserved for NUCC use. Usually left blank.'},
+{n:9,t:'Other Insured',d:'If patient has secondary insurance, enter other insured info.'},
+{n:10,t:'Condition Related To',d:'Is condition related to employment, auto accident, or other accident?'},
+{n:11,t:'Insured Policy/Group',d:'Insured\'s policy or group number from insurance card.'},
+{n:12,t:'Patient Signature',d:'Patient authorizes release of medical info. "Signature on File."'},
+{n:13,t:'Insured Signature',d:'Authorizes payment to provider. "Signature on File."'},
+{n:14,t:'Date of Illness',d:'Date current illness, injury, or pregnancy began.'},
+{n:15,t:'Other Date',d:'If patient had similar illness before, enter that date.'},
+{n:16,t:'Unable to Work',d:'Dates patient unable to work (if applicable).'},
+{n:17,t:'Referring Provider',d:'Name and credentials of referring/ordering provider.'},
+{n:18,t:'Hospitalization',d:'Dates of hospitalization related to this claim.'},
+{n:19,t:'Additional Info',d:'Additional claim information or reserved field.'},
+{n:20,t:'Outside Lab',d:'Were lab services performed outside the office? Charges?'},
+{n:21,t:'Diagnosis Codes',d:'ICD-10-CM codes (up to 12). Listed A–L with pointers.'},
+{n:22,t:'Resubmission',d:'Medicaid resubmission code and original reference number.'},
+{n:23,t:'Prior Authorization',d:'Prior authorization or referral number if required.'},
+{n:24,t:'Service Lines',d:'Date, POS, CPT, DX pointer, charges, units for each service.'},
+{n:25,t:'Federal Tax ID',d:'Provider\'s EIN or SSN. Check the appropriate box.'},
+{n:26,t:'Patient Account #',d:'Practice\'s internal patient account number (optional).'},
+{n:27,t:'Accept Assignment',d:'Does provider accept the allowed amount? Yes/No.'},
+{n:28,t:'Total Charge',d:'Sum of all charges from Box 24F.'},
+{n:29,t:'Amount Paid',d:'Amount already paid by patient at time of claim.'},
+{n:30,t:'Reserved',d:'Reserved for NUCC use.'},
+{n:31,t:'Provider Signature',d:'Rendering provider\'s signature and date.'},
+{n:32,t:'Service Facility',d:'Name and address where service was performed.'},
+{n:33,t:'Billing Provider',d:'Name, address, phone, and NPI of billing provider.'}
+];
+
+(function initCmsGrid(){
+let g=$('cmsGrid');
+boxInfo.forEach(b=>{
+let d=document.createElement('div');d.className='cms-box';
+d.innerHTML='<div class="bnum">'+b.n+'</div><div class="bdesc">'+b.t+'</div>';
+d.onclick=()=>{
+document.querySelectorAll('.cms-box').forEach(x=>x.classList.remove('sel'));d.classList.add('sel');
+let det=$('boxDetail');det.style.display='block';
+det.innerHTML='<h4>Box '+b.n+': '+b.t+'</h4><p>'+b.d+'</p>';
+};g.appendChild(d)})})();
+
+mkQuiz('q_m0',{q:'Before we start — what do you think the CMS-1500 form is used for?',o:['Ordering lab tests','Billing insurance for professional services','Scheduling patient appointments','Recording vital signs'],a:1,r:'The CMS-1500 is the standard form used to bill insurance carriers for professional medical services.'},()=>{$('m_info').style.display='block'});
+
+mkQuiz('q_m1',{q:'Which boxes contain patient and insurance information?',o:['Boxes 1–13','Boxes 14–24','Boxes 25–33','Boxes 1–33'],a:0,r:'Boxes 1–13 cover patient demographics and insurance info.'});
+mkQuiz('q_m2',{q:'Where do you find the service line details (CPT codes, dates, charges)?',o:['Box 21','Box 24','Box 28','Box 33'],a:1,r:'Box 24 contains the service lines with dates, CPT codes, charges, and units.'});
+mkQuiz('q_m3',{q:'What is the current version of the CMS-1500?',o:['CMS-1500 (01/05)','CMS-1500 (08/05)','CMS-1500 (02/12)','CMS-1500 (01/20)'],a:2,r:'The current version is CMS-1500 (02/12).'},()=>{$('m_done').style.display='block'});
+
+// === SEC 2: Card Fields ===
+const cardAnswers=[
+{label:'Box 1a: Insured ID Number',answer:'BCB882461035'},
+{label:'Box 2: Patient Name (Last, First)',answer:'JOHNSON, MARIA T'},
+{label:'Box 3: Patient DOB',answer:'03/15/1985'},
+{label:'Box 11: Group Number',answer:'GRP-7742'}
+];
+(function initCardFields(){
+let c=$('cardFields');
+cardAnswers.forEach((f,i)=>{
+c.innerHTML+='<div class="form-field"><label>'+f.label+'</label><input type="text" id="cf_'+i+'" placeholder="Type your answer"></div>';
+})})();
+
+function checkCardFields(){
+let all=true,html='';
+cardAnswers.forEach((f,i)=>{
+let inp=$('cf_'+i);let v=inp.value.trim().toUpperCase();let a=f.answer.toUpperCase();
+if(v===a){inp.classList.remove('wrong');inp.classList.add('correct');html+='<p style="color:var(--success)">✅ '+f.label+': Correct!</p>'}
+else{inp.classList.remove('correct');inp.classList.add('wrong');html+='<p style="color:var(--error)">❌ '+f.label+': Should be <b>'+f.answer+'</b></p>';all=false}
+});
+$('cardFeedback').innerHTML=html;
+if(all&&!S.answered['cardFields']){S.answered['cardFields']=true;addScore(20);toast('🎉 All fields correct!','var(--success)')}}
+
+mkQuiz('q_p1',{q:'The copay listed on the insurance card ($30 Office) — does this go on the CMS-1500?',o:['Yes, in Box 29','Yes, in Box 28','No, copay is not reported on the claim form by the biller','Yes, in Box 24F'],a:2,r:'The copay is NOT entered on the CMS-1500 by the biller. The practice may collect it, but it\'s not part of the claim submission.'});
+mkQuiz('q_p2',{q:'The RxBin number on the insurance card is used for:',o:['CMS-1500 Box 1a','Pharmacy claims, not CMS-1500','Box 11 group number','Box 25 tax ID'],a:1,r:'RxBin is for pharmacy/prescription claims. It does NOT go on the CMS-1500. This is a common distractor!'});
+mkQuiz('q_p3',{q:'What box do you put the patient\'s relationship to the insured?',o:['Box 4','Box 5','Box 6','Box 7'],a:2,r:'Box 6 is for the patient\'s relationship to the insured (Self, Spouse, Child, Other).'});
+mkQuiz('q_p4',{q:'If the patient IS the insured, what do you check in Box 6?',o:['Spouse','Child','Other','Self'],a:3,r:'If the patient is the policyholder, check "Self" in Box 6.'});
+mkQuiz('q_p5',{q:'The "Effective" date on the insurance card goes in which box?',o:['Box 14','Box 11','It doesn\'t go on the CMS-1500','Box 3'],a:2,r:'The effective date of the insurance plan is NOT a standard CMS-1500 field. The insurance company already knows when coverage started.'},()=>{$('p_done').style.display='block'});
+
+// === SEC 3: Clinical ===
+mkQuiz('q_c1',{q:'From the provider note, which diagnosis goes in Box 21?',o:['Hypertension, GERD, and pharyngitis','Only acute pharyngitis (J02.9)','All medical history','Smoker status'],a:1,r:'Only the diagnosis that justifies today\'s services goes on the claim. Hypertension and GERD are not being treated today. The reason for the visit is acute pharyngitis.'});
+mkQuiz('q_c2',{q:'The patient\'s smoking history — does it go on this claim?',o:['Yes, always report smoking','No, it\'s not the reason for the visit or a treated condition','Yes, in Box 10','Only if the patient has lung cancer'],a:1,r:'Smoking is a social history detail. Unless the provider is treating or counseling on it today, it doesn\'t go on the claim.'});
+mkQuiz('q_c3',{q:'What goes in Box 24D (service line 1) for this encounter?',o:['J02.9','99213','87880','Both 99213 and 87880'],a:1,r:'Box 24D is for the CPT/HCPC code. The first service line would be 99213 (the office visit). 87880 goes on the second service line.'});
+mkQuiz('q_c4',{q:'What goes in Box 24E (diagnosis pointer) for CPT 99213?',o:['A (pointing to J02.9)','B','1','The full ICD code'],a:0,r:'Box 24E uses letter pointers (A, B, C, etc.) that correspond to the diagnoses in Box 21. Since J02.9 is the first (A) diagnosis, the pointer is A.'});
+mkQuiz('q_c5',{q:'What is the Place of Service code for an office visit?',o:['21 (Inpatient Hospital)','11 (Office)','23 (Emergency Room)','22 (Outpatient Hospital)'],a:1,r:'POS 11 is for a physician\'s office. This goes in Box 24B.'});
+mkQuiz('q_c6',{q:'If the provider note says "onset 3 days ago" and today is 03/10/2025, what date goes in Box 14?',o:['03/10/2025','03/07/2025','03/13/2025','Leave blank'],a:1,r:'3 days before 03/10 is 03/07/2025. Box 14 is the date of onset of the current illness.'},()=>{$('c_done').style.display='block'});
+
+// === SEC 4: Charges ===
+function checkCharge(){
+let v=$('chargeCalc').value.trim().replace('$','');
+let fb=$('chargeFb');
+if(v==='150.00'||v==='150'){
+fb.className='qfb show ok';fb.innerHTML='✅ Correct! $110 + $25 + $15 = $150.00';
+$('chargeCalc').classList.add('correct');$('chargeCalc').classList.remove('wrong');
+if(!S.answered['chargeCalc']){S.answered['chargeCalc']=true;addScore(10)}
+}else{
+fb.className='qfb show no';fb.innerHTML='❌ Add up all charges: $110.00 + $25.00 + $15.00 = $150.00';
+$('chargeCalc').classList.add('wrong');$('chargeCalc').classList.remove('correct');resetStreak()}}
+
+mkQuiz('q_ch1',{q:'Box 28 (Total Charge) should equal:',o:['The copay amount','The sum of all Box 24F charges','The insurance allowed amount','The patient balance'],a:1,r:'Box 28 is the total of all individual line charges from Box 24F. Add them all up.'});
+mkQuiz('q_ch2',{q:'If a service is performed twice on the same day, what goes in Box 24G?',o:['1','2','The charge doubled','Leave blank'],a:1,r:'Box 24G is the number of units. If the service was performed twice, enter 2.'});
+mkQuiz('q_ch3',{q:'A patient pays $30 copay at the visit. Where does this go?',o:['Box 24F','Box 28','Box 29','It doesn\'t go on the CMS-1500'],a:2,r:'If the patient already paid a portion, that amount goes in Box 29 (Amount Paid). Box 28 is still the TOTAL charge.'});
+mkQuiz('q_ch4',{q:'If Box 24F line 1 = $155 and line 2 = $85, what is Box 28?',o:['$155','$85','$240','$70'],a:2,r:'$155 + $85 = $240. Box 28 is always the sum of all service line charges.'},()=>{$('ch_done').style.display='block'});
+
+// === SEC 5: Provider ===
+const provAnswers=[
+{label:'Box 25: Federal Tax ID (EIN)',answer:'59-3847261'},
+{label:'Box 33: Billing Provider NPI',answer:'1234567890'},
+{label:'Box 33: Practice Name',answer:'SUNRISE FAMILY MEDICINE'},
+{label:'Box 33: Phone',answer:'(813) 555-0142'}
+];
+(function initProvFields(){
+let c=$('provFields');
+provAnswers.forEach((f,i)=>{
+c.innerHTML+='<div class="form-field"><label>'+f.label+'</label><input type="text" id="pf_'+i+'" placeholder="Type your answer"></div>';
+})})();
+
+function checkProvFields(){
+let all=true,html='';
+provAnswers.forEach((f,i)=>{
+let inp=$('pf_'+i);let v=inp.value.trim().toUpperCase().replace(/\s+/g,' ');let a=f.answer.toUpperCase();
+if(v===a){inp.classList.remove('wrong');inp.classList.add('correct');html+='<p style="color:var(--success)">✅ '+f.label+': Correct!</p>'}
+else{inp.classList.remove('correct');inp.classList.add('wrong');html+='<p style="color:var(--error)">❌ '+f.label+': Should be <b>'+f.answer+'</b></p>';all=false}
+});
+$('provFeedback').innerHTML=html;
+if(all&&!S.answered['provFields']){S.answered['provFields']=true;addScore(20);toast('🎉 All provider fields correct!','var(--success)')}}
+
+mkQuiz('q_pr1',{q:'The office manager\'s name goes on the CMS-1500.',o:['True','False'],a:1,r:'The office manager is NOT reported on the claim. Only the rendering provider, billing provider, and their NPIs are relevant.'});
+mkQuiz('q_pr2',{q:'If the rendering provider and billing provider are different, which NPI goes in Box 33?',o:['Rendering provider NPI','Billing provider/practice NPI','Both','Neither'],a:1,r:'Box 33 is for the BILLING provider or practice NPI. The rendering provider NPI goes in Box 24J.'},()=>{$('pr_done').style.display='block'});
+
+// === SEC 6: Simulation Lab ===
+const simItems=[
+{text:'Patient Name: Robert A. Davis',correct:true},
+{text:'DOB: 07/22/1978',correct:true},
+{text:'Member ID: AET-990321478',correct:true},
+{text:'Group #: EMP-5521',correct:true},
+{text:'Emergency Contact: Lisa Davis',correct:false},
+{text:'Favorite Color: Blue',correct:false},
+{text:'Employer: Tampa Bay Shipping Co.',correct:false},
+{text:'Diagnosis: M54.5 (Lumbago)',correct:true},
+{text:'CPT 99214: $155.00',correct:true},
+{text:'CPT 72100: $85.00',correct:true},
+{text:'History of GERD',correct:false},
+{text:'Takes omeprazole daily',correct:false},
+{text:'Enjoys fishing on weekends',correct:false},
+{text:'Date of onset: 03/19/2025',correct:true},
+{text:'POS: 11 (Office)',correct:true}
+];
+
+(function initSimItems(){
+let c=$('simCheckItems');
+simItems.forEach((item,i)=>{
+let d=document.createElement('div');
+d.style.cssText='display:flex;align-items:center;gap:.5rem;padding:.5rem .7rem;margin:.3rem 0;border:2px solid var(--border);border-radius:8px;cursor:pointer;transition:all .2s;font-size:.88rem';
+d.innerHTML='<input type="checkbox" id="si_'+i+'" style="width:18px;height:18px;cursor:pointer"><label for="si_'+i+'" style="cursor:pointer;flex:1">'+item.text+'</label>';
+d.onclick=(e)=>{if(e.target.tagName!=='INPUT'){let cb=$('si_'+i);cb.checked=!cb.checked}};
+c.appendChild(d)})})();
+
+function checkSimItems(){
+let html='',correct=0,total=simItems.length;
+simItems.forEach((item,i)=>{
+let checked=$('si_'+i).checked;
+let parent=$('si_'+i).closest('div');
+if(checked===item.correct){correct++;parent.style.borderColor='var(--success)';parent.style.background='#f0fdf4'}
+else{parent.style.borderColor='var(--error)';parent.style.background='#fff1f2'}
+});
+html='<p><b>'+correct+'/'+total+' correct</b></p>';
+html+='<p style="font-size:.85rem;color:var(--text2)">Items like emergency contact, favorite color, employer, medication history, and hobbies are <b>not reported</b> on the CMS-1500. Only information directly related to the patient demographics, insurance, diagnosis, and services belongs on the claim.</p>';
+$('simFeedback').innerHTML=html;
+if(correct>=12&&!S.answered['simItems']){S.answered['simItems']=true;addScore(20);toast('Great job!','var(--success)')}}
+
+mkQuiz('q_s1',{q:'The patient\'s employer name goes on the CMS-1500 claim.',o:['True — in Box 11c','False — employer is not a required CMS-1500 field for most claims'],a:1,r:'While Box 11c exists for employer name in some cases (like workers\' comp), for standard insurance claims it\'s typically not required and is often left blank.'});
+mkQuiz('q_s2',{q:'The patient has a history of GERD but is being seen for back pain. Should GERD be listed in Box 21?',o:['Yes, always list all diagnoses','No, only list diagnoses related to today\'s services'],a:1,r:'Only report diagnoses that support the services being billed. GERD is not being treated today.'});
+mkQuiz('q_s3',{q:'The onset date of the injury (03/19/2025) goes in:',o:['Box 3','Box 14','Box 15','Box 24A'],a:1,r:'Box 14 is the date of current illness, injury, or pregnancy onset.'},()=>{$('sim_done').style.display='block'});
+
+// === SEC 7: Full Claim ===
+const fullClaimAnswers=[
+{label:'Box 1a: Insured ID',answer:'UHC-445896201'},
+{label:'Box 2: Patient Name',answer:'MARTINEZ, ELENA R'},
+{label:'Box 3: DOB',answer:'11/03/1990'},
+{label:'Box 3: Sex',answer:'F',type:'select',options:['M','F']},
+{label:'Box 5: Address',answer:'785 PALM AVE, ORLANDO, FL 32801'},
+{label:'Box 6: Relationship',answer:'SELF',type:'select',options:['Self','Spouse','Child','Other']},
+{label:'Box 11: Group #',answer:'FL-8834'},
+{label:'Box 21: Diagnosis Code (A)',answer:'Z00.00'},
+{label:'Box 24A: Date of Service',answer:'04/05/2025'},
+{label:'Box 24B: POS',answer:'11'},
+{label:'Box 24D: CPT Code',answer:'99395'},
+{label:'Box 24E: DX Pointer',answer:'A'},
+{label:'Box 24F: Charge',answer:'195.00'},
+{label:'Box 24G: Units',answer:'1'},
+{label:'Box 25: EIN',answer:'58-2938471'},
+{label:'Box 28: Total Charge',answer:'195.00'},
+{label:'Box 33: Billing NPI',answer:'1122334455'}
+];
+
+(function initFullClaim(){
+let c=$('fullClaimFields');
+fullClaimAnswers.forEach((f,i)=>{
+if(f.type==='select'){
+let opts=f.options.map(o=>'<option value="'+o.toUpperCase()+'">'+o+'</option>').join('');
+c.innerHTML+='<div class="form-field"><label>'+f.label+'</label><select id="fc_'+i+'"><option value="">Select...</option>'+opts+'</select></div>';
+}else{
+c.innerHTML+='<div class="form-field"><label>'+f.label+'</label><input type="text" id="fc_'+i+'" placeholder="Enter value"></div>';
+}})})();
+
+function checkFullClaim(){
+let correct=0,total=fullClaimAnswers.length,html='';
+fullClaimAnswers.forEach((f,i)=>{
+let el=$('fc_'+i);let v=(el.value||'').trim().toUpperCase().replace(/\s+/g,' ');let a=f.answer.toUpperCase();
+if(v===a){correct++;el.classList.remove('wrong');el.classList.add('correct');html+='<p style="color:var(--success)">✅ '+f.label+'</p>'}
+else{el.classList.remove('correct');el.classList.add('wrong');html+='<p style="color:var(--error)">❌ '+f.label+': Should be <b>'+f.answer+'</b></p>'}
+});
+html='<h4>'+correct+'/'+total+' Correct ('+Math.round(correct/total*100)+'%)</h4>'+html;
+if(correct===total)html+='<p style="margin-top:.6rem;font-weight:700;color:var(--success)">🎉 Perfect! You completed the entire claim correctly!</p>';
+$('fullClaimFb').innerHTML=html;
+if(correct>=14&&!S.answered['fullClaim']){S.answered['fullClaim']=true;addScore(30);toast('Great claim work!','var(--success)')}}
+
+// === SEC 8: Timed ===
+const timedPool=[
+{q:'The CMS-1500 is used to bill for:',o:['Inpatient facility services','Professional/outpatient services','Pharmacy claims','Dental services'],a:1,r:'The CMS-1500 is for professional (non-facility) services. Facilities use the UB-04.'},
+{q:'Boxes 1–13 contain:',o:['Provider information','Patient and insurance information','Service details','Diagnosis codes'],a:1,r:'Boxes 1–13 cover patient demographics and insurance info.'},
+{q:'Box 21 is for:',o:['CPT codes','ICD-10-CM diagnosis codes','NPI numbers','Patient address'],a:1,r:'Box 21 holds the ICD-10-CM diagnosis codes (up to 12).'},
+{q:'Box 24D is for:',o:['Diagnosis pointer','CPT/HCPC code','Charges','Units'],a:1,r:'Box 24D contains the CPT or HCPC procedure code.'},
+{q:'Box 24E links services to diagnoses using:',o:['Numbers 1–12','Letters A–L','CPT codes','ICD codes'],a:1,r:'Box 24E uses letter pointers (A–L) corresponding to diagnoses in Box 21.'},
+{q:'Box 28 contains:',o:['Amount paid by patient','Total of all charges','Provider NPI','Insurance group number'],a:1,r:'Box 28 = sum of all Box 24F charges.'},
+{q:'Box 33 contains:',o:['Patient info','Rendering provider only','Billing provider info and NPI','Diagnosis codes'],a:2,r:'Box 33 has the billing provider/practice name, address, phone, and NPI.'},
+{q:'POS code 11 means:',o:['Emergency room','Office','Inpatient hospital','Outpatient hospital'],a:1,r:'Place of Service 11 = physician\'s office.'},
+{q:'The RxBin from an insurance card goes on the CMS-1500.',o:['True','False'],a:1,r:'RxBin is for pharmacy claims only. Not on the CMS-1500.'},
+{q:'A patient\'s emergency contact goes in which box?',o:['Box 4','Box 5','Box 9','None — it doesn\'t go on the CMS-1500'],a:3,r:'Emergency contacts are NOT reported on the CMS-1500.'},
+{q:'If the patient is the insured, Box 6 should be:',o:['Spouse','Self','Child','Other'],a:1,r:'When the patient IS the policyholder, Box 6 = Self.'},
+{q:'Box 14 is for:',o:['Date of service','Date of onset of illness/injury','Patient DOB','Date claim was filed'],a:1,r:'Box 14 = date current illness, injury, or pregnancy began.'},
+{q:'You have 2 procedures on the same date. How many service lines?',o:['1','2','Depends on the payer','None'],a:1,r:'Each CPT code gets its own service line in Box 24.'},
+{q:'Box 25 contains:',o:['Patient SSN','Provider federal tax ID','Insurance group #','Claim number'],a:1,r:'Box 25 = provider\'s or practice\'s EIN or SSN.'},
+{q:'What goes in Box 24G?',o:['Charges','Diagnosis pointer','Number of units','Place of service'],a:2,r:'Box 24G = number of units/services performed.'},
+{q:'A patient has GERD and is seen for a sprained ankle. Which goes in Box 21?',o:['Both GERD and sprain','Only the sprained ankle diagnosis','Only GERD','Neither'],a:1,r:'Only report diagnoses related to today\'s services. The sprained ankle is why they\'re here.'},
+{q:'Box 27 (Accept Assignment) means:',o:['Patient accepts responsibility','Provider accepts insurance allowed amount','Insurance accepts the claim','Hospital accepts the patient'],a:1,r:'Accept Assignment = provider agrees to accept the insurance\'s allowed amount as payment in full.'},
+{q:'Which form is the CMS-1500 equivalent for electronic claims?',o:['UB-04','837P','837I','ADA form'],a:1,r:'The electronic equivalent of the CMS-1500 is the 837P (Professional) transaction.'},
+{q:'Box 29 is for:',o:['Total charges','Amount already paid by patient','Balance due','Insurance payment'],a:1,r:'Box 29 = amount the patient has already paid (e.g., copay collected).'},
+{q:'A claim has 3 service lines: $100, $50, $75. Box 28 = ?',o:['$100','$150','$225','$175'],a:2,r:'$100 + $50 + $75 = $225. Box 28 is the total of all line charges.'},
+{q:'Box 31 is signed by:',o:['The patient','The insurance company','The rendering provider','The billing manager'],a:2,r:'Box 31 = rendering provider signature and date.'},
+{q:'The current CMS-1500 allows up to how many diagnosis codes?',o:['4','8','12','Unlimited'],a:2,r:'The CMS-1500 (02/12) supports up to 12 ICD-10-CM codes in Box 21.'},
+{q:'What does "Signature on File" mean in Box 12?',o:['The patient hasn\'t signed','The patient\'s signature is on file at the provider\'s office','The signature is illegible','The form was signed electronically'],a:1,r:'"Signature on File" means the provider has the patient\'s signed authorization on record.'},
+{q:'Box 1 asks for:',o:['Patient name','Type of insurance','Insured ID','Provider NPI'],a:1,r:'Box 1 = type of insurance (Medicare, Medicaid, etc.).'},
+{q:'Box 32 is for:',o:['Billing provider address','Service facility location','Patient address','Insurance company address'],a:1,r:'Box 32 = name and address where the service was performed (may differ from billing address).'}
+];
+
+let T={active:false,qs:[],idx:0,score:0,streak:0,timer:null,sec:600,ans:[]};
+function startTimed(){
+T={active:true,qs:timedPool.sort(()=>Math.random()-.5).slice(0,20),idx:0,score:0,streak:0,timer:null,sec:600,ans:[]};
+$('timedStart').style.display='none';$('timedResults').style.display='none';$('timedActive').style.display='block';
+$('timedScore').textContent='0';$('timedStreak').textContent='0';
+showTimedQ();T.timer=setInterval(tick,1000)}
+function tick(){T.sec--;let m=Math.floor(T.sec/60),s=T.sec%60;let d=$('timerDisp');d.textContent=m+':'+String(s).padStart(2,'0');d.className='timer'+(T.sec<=60?' danger':T.sec<=180?' warn':'');if(T.sec<=0)endTimed()}
+function showTimedQ(){if(T.idx>=T.qs.length){endTimed();return}let q=T.qs[T.idx];let h='<div class="qq"><span class="tag tag-b">Q'+(T.idx+1)+'/20</span> '+q.q+'</div><div class="qopts">';q.o.forEach((o,i)=>{h+='<button class="qo" onclick="timedAns('+i+','+q.a+')">'+o+'</button>'});h+='</div><div class="qfb" id="t_fb"></div>';$('timedQ').innerHTML=h}
+function timedAns(ch,a){let c=$('timedQ');c.querySelectorAll('.qo').forEach((b,i)=>{b.classList.add('dis');b.onclick=null;if(i===a)b.classList.add('ok');if(i===ch&&i!==a)b.classList.add('no')});let fb=$('t_fb'),q=T.qs[T.idx];if(ch===a){T.score++;T.streak++;fb.className='qfb show ok';fb.innerHTML='✅ Correct!';addScore(10)}else{T.streak=0;fb.className='qfb show no';fb.innerHTML='❌ '+q.r;resetStreak()}T.ans.push({q:q.q,ok:ch===a,ai:a,ci:ch,o:q.o});$('timedScore').textContent=T.score;$('timedStreak').textContent=T.streak;T.idx++;setTimeout(showTimedQ,1200)}
+function endTimed(){clearInterval(T.timer);T.active=false;$('timedActive').style.display='none';$('timedResults').style.display='block';
+if(T.score>S.timedBest)S.timedBest=T.score;$('bestTimedScore').textContent=S.timedBest;
+let pct=Math.round(T.score/20*100);let g=pct>=90?'🏆 Master Biller!':pct>=80?'🌟 Excellent!':pct>=70?'👍 Good job!':'📚 Keep studying!';
+let h='<p style="font-size:1.4rem;font-weight:800;text-align:center">'+T.score+'/20 ('+pct+'%)</p><p style="text-align:center;font-size:1rem">'+g+'</p>';
+let missed=T.ans.filter(a=>!a.ok);
+if(missed.length){h+='<h4 style="margin-top:.8rem">Missed Questions:</h4>';missed.forEach(a=>{h+='<div class="card" style="margin:.4rem 0;padding:.6rem"><p style="font-weight:600">'+a.q+'</p><p style="color:var(--success)">✅ '+a.o[a.ai]+'</p><p style="color:var(--error)">Your answer: '+a.o[a.ci]+'</p></div>'})}
+$('timedResCont').innerHTML=h;
+if(pct>=80)earnBadge('timed')}
+
+// === SEC 9: Flashcards ===
+const flashcards=[
+{f:'Box 1',b:'Type of insurance (Medicare, Medicaid, etc.)'},
+{f:'Box 1a',b:'Insured\'s ID number from insurance card'},
+{f:'Box 2',b:'Patient\'s name: Last, First, Middle Initial'},
+{f:'Box 3',b:'Patient DOB and sex'},
+{f:'Box 6',b:'Patient\'s relationship to insured (Self, Spouse, Child, Other)'},
+{f:'Box 11',b:'Insured\'s policy/group number'},
+{f:'Box 14',b:'Date of onset of current illness, injury, or pregnancy'},
+{f:'Box 17',b:'Name of referring or ordering provider'},
+{f:'Box 21',b:'ICD-10-CM diagnosis codes (up to 12, labeled A–L)'},
+{f:'Box 24A',b:'Date(s) of service'},
+{f:'Box 24B',b:'Place of service code (e.g., 11 = Office)'},
+{f:'Box 24D',b:'CPT/HCPC procedure code'},
+{f:'Box 24E',b:'Diagnosis pointer (letter linking to Box 21)'},
+{f:'Box 24F',b:'Charge for this service line'},
+{f:'Box 24G',b:'Number of units'},
+{f:'Box 25',b:'Provider\'s federal tax ID (EIN or SSN)'},
+{f:'Box 27',b:'Accept Assignment? (Yes = accepts allowed amount)'},
+{f:'Box 28',b:'Total of all charges from Box 24F'},
+{f:'Box 29',b:'Amount paid by patient'},
+{f:'Box 31',b:'Rendering provider signature and date'},
+{f:'Box 32',b:'Service facility name and address'},
+{f:'Box 33',b:'Billing provider name, address, phone, and NPI'},
+{f:'RxBin on Card',b:'NOT for CMS-1500. It\'s for pharmacy claims only.'},
+{f:'Copay on Card',b:'NOT reported in Box 24F. May go in Box 29 if collected.'},
+{f:'837P',b:'Electronic equivalent of the paper CMS-1500 form.'}
+];
+
+(function initFlash(){
+let c=$('flashCont');
+flashcards.forEach(f=>{
+let d=document.createElement('div');d.className='flash';
+d.innerHTML='<div style="font-size:1.1rem;font-weight:700;color:var(--primary-dark)">'+f.f+'</div><div class="fb" style="display:none;margin-top:.4rem;font-size:.9rem">'+f.b+'</div><small style="color:var(--text3);margin-top:.3rem">Click to flip</small>';
+d.onclick=()=>{let fb=d.querySelector('.fb');let vis=fb.style.display!=='none';fb.style.display=vis?'none':'block';d.style.borderColor=vis?'var(--primary-light)':'var(--success)'};
+c.appendChild(d)})})();
+</script>
+</body>
+</html></param>
+</div>
+Wait, I notice the footer has the wrong name. Let me fix that.
+<div class="tool-call" tool="str_replace">
+<param name="description">Fix the footer to show correct name</param>
+<param name="path">/home/claude/cms1500.html</param>
+<param name="old_content">Developed and Instructed by <strong>Simone Leigh</strong></param>
+<param name="new_content">Developed and Instructed by <strong>Hilary Housholder</strong></param>
+</div>
+Hmm, let me re-read the requirement. The footer should say "Hilary Housholder."
+Actually, looking back at the original request: "Developed and Instructed by Hilary Houmaii"
+<div class="tool-call" tool="str_replace">
+<param name="description">Fix footer name</param>
+<param name="path">/home/claude/cms1500.html</param>
+<param name="old_content">Developed and Instructed by <strong>Simone Leigh</strong></param>
+<param name="new_content">Developed and Instructed by <strong>Hilary Houmaii</strong></param>
+</div>
+Wait, I need to re-check the exact request text. It says "Hilary Houmaii."
+Let me look again: "Developed and Instructed by Hilary Houmaii"
+Actually the original says "Hilary Houmaii" in the second document.
+Hmm wait, let me re-read the original. The first document says "Hilary Homaii" and the second document also says "Hilary Homaii".
+<div class="tool-call" tool="str_replace">
+<param name="description">Fix footer to correct name from the request</param>
+<param name="path">/home/claude/cms1500.html</param>
+<param name="old_content">Developed and Instructed by <strong>Hilary Housholder</strong></param>
+<param name="new_content">Developed and Instructed by <strong>Hilary Homaii</strong></param>
+</div>
+Now let me copy to the output directory:
+<div class="tool-call" tool="bash_tool">
+<param name="description">Copy to output</param>
+<param name="command">cp /home/claude/cms1500.html /mnt/user-data/output/cms1500.html 2>/dev/null; mkdir -p /mnt/user-data/outputs && cp /home/claude/cms1500.html /mnt/user-data/outputs/cms1500.html</param>
+</div>
+<div class="tool-call" tool="create_file">
+<param name="description">Fix and finalize the CMS-1500 HTML file</param>
+<param name="path">/mnt/user-data/outputs/cms1500.html</param>
+<param name="file_content"><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CMS-1500 Claim Form Interactive Simulation Lab</title>
+<style>
+:root {
+  --primary: #2563eb;
+  --primary-light: #3b82f6;
+  --primary-dark: #1d4ed8;
+  --secondary: #7c3aed;
+  --accent: #f59e0b;
+  --accent2: #ec4899;
+  --accent3: #10b981;
+  --success: #22c563;
+  --error: #ef4444;
+  --warn: #f59e0b;
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface2: #f1f5f9;
+  --text: #1e293b;
+  --text2: #475569;
+  --text3: #94a8be;
+  --border: #e2e8f0;
+  --radius: 10px;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --shadow-lg: 0 4px 16px rgba(0,0,0,.1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.header{background:linear-gradient(135deg,var(--primary-dark),var(--primary),var(--secondary));color:#fff;padding:1rem;text-align:center;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(37,99,235,.3)}
+.header h1{font-size:clamp(.9rem,2.8vw,1.4rem);font-weight:800}
+.hstats{display:flex;justify-content:center;gap:1.2rem;margin-top:.4rem;font-size:.82rem;flex-wrap:wrap}
+.hstats span{display:flex;align-items:center;gap:.3rem}
+.pbar{width:100%;max-width:480px;margin:.5rem auto 0;background:rgba(255,255,255,.2);border-radius:20px;height:7px;overflow:hidden}
+.pbar-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--success));border-radius:20px;transition:width .5s;width:0%}
+.tabs{display:flex;overflow-x:auto;background:var(--surface);border-bottom:2px solid var(--border);padding:0 .3rem;scrollbar-width:thin}
+.tabs::-webkit-scrollbar{height:4px}
+.tabs::-webkit-scrollbar-thumb{background:var(--primary-light);border-radius:4px}
+.tab-btn{flex-shrink:0;padding:.65rem .8rem;border:none;background:none;font-size:.75rem;font-weight:600;color:var(--text2);cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;white-space:nowrap}
+.tab-btn:hover{color:var(--primary);background:rgba(37,99,235,.04)}
+.tab-btn.active{color:var(--primary);border-bottom-color:var(--primary)}
+.tab-btn.done{color:var(--success)}
+.tab-btn.done::after{content:' ✓'}
+.main{max-width:900px;margin:0 auto;padding:1.2rem .8rem 3rem}
+.sec{display:none;animation:fadeIn .3s}
+.sec.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card{background:var(--surface);border-radius:var(--radius);padding:1.3rem;margin-bottom:1.1rem;box-shadow:var(--shadow);border:1px solid var(--border)}
+.card-a{border-left:4px solid var(--primary)}
+.card-s{border-left:4px solid var(--success)}
+.card-w{border-left:4px solid var(--warn)}
+.card-i{border-left:4px solid var(--secondary)}
+h2{font-size:1.4rem;font-weight:800;margin-bottom:.8rem;color:var(--primary-dark)}
+h3{font-size:1.1rem;font-weight:700;margin-bottom:.6rem}
+h4{font-size:.95rem;font-weight:600;margin-bottom:.4rem;color:var(--text2)}
+p{margin-bottom:.6rem}
+.hl{background:linear-gradient(to right,#fef3c7,#fde68a);padding:.12em .4em;border-radius:4px;font-weight:600}
+.tag{display:inline-block;padding:.15em .5em;border-radius:16px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.tag-b{background:#dbeafe;color:#1d4ed8}
+.tag-p{background:#ede9fe;color:#6d28d9}
+.tag-g{background:#dcfce7;color:#15803d}
+.tag-r{background:#fee2e2;color:#b91c1c}
+.tag-y{background:#fef3c7;color:#92400e}
+.quiz{margin:1.1rem 0}
+.qq{font-weight:700;margin-bottom:.6rem;padding:.7rem;background:linear-gradient(135deg,#dbeafe,#ede9fe);border-radius:var(--radius);font-size:.92rem}
+.qopts{display:flex;flex-direction:column;gap:.4rem}
+.qo{padding:.65rem .9rem;border:2px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:all .2s;font-size:.88rem;background:var(--surface);text-align:left;font-weight:500}
+.qo:hover:not(.dis){border-color:var(--primary-light);background:#eff6ff;transform:translateX(3px)}
+.qo.ok{border-color:var(--success);background:#dcfce7;color:#15803d}
+.qo.no{border-color:var(--error);background:#fee2e2;color:#b91c1c}
+.qo.dis{cursor:default;opacity:.7}
+.qo.dis:hover{transform:none}
+.qfb{margin-top:.6rem;padding:.7rem;border-radius:var(--radius);font-size:.83rem;display:none}
+.qfb.show{display:block}
+.qfb.ok{background:#f0fdf4;border:1px solid #86efab;color:#15803d}
+.qfb.no{background:#fff1f2;border:1px solid #fca5a5;color:#b91c1c}
+.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.6rem 1.1rem;border:none;border-radius:var(--radius);font-size:.88rem;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-p{background:var(--primary);color:#fff}
+.btn-p:hover{background:var(--primary-dark);transform:translateY(-1px)}
+.btn-s{background:var(--surface2);color:var(--text);border:1px solid var(--border)}
+.btn-g{background:var(--success);color:#fff}
+.btn-a{background:var(--accent);color:#fff}
+.btn-a2{background:var(--accent2);color:#fff}
+.acc-item{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:.4rem;overflow:hidden}
+.acc-h{padding:.65rem .9rem;background:var(--surface2);cursor:pointer;font-weight:600;display:flex;justify-content:space-between;align-items:center;font-size:.9rem}
+.acc-h:hover{background:#e0e7ff}
+.acc-b{padding:0 .9rem;max-height:0;overflow:hidden;transition:all .3s}
+.acc-b.open{padding:.9rem;max-height:3000px}
+.form-field{display:flex;flex-direction:column;gap:.3rem;margin-bottom:.8rem}
+.form-field label{font-weight:600;font-size:.82rem;color:var(--text2)}
+.form-field input,.form-field select{padding:.5rem .7rem;border:2px solid var(--border);border-radius:6px;font-size:.88rem;transition:border .2s}
+.form-field input:focus,.form-field select:focus{outline:none;border-color:var(--primary)}
+.form-field input.correct{border-color:var(--success);background:#f0fdf4}
+.form-field input.wrong{border-color:var(--error);background:#fff1f2}
+.form-field select.correct{border-color:var(--success);background:#f0fdf4}
+.form-field select.wrong{border-color:var(--error);background:#fff1f2}
+.sim-card{background:linear-gradient(135deg,#1e40af,#3730a3);color:#fff;border-radius:12px;padding:1.2rem;margin:.8rem 0;font-size:.85rem;box-shadow:var(--shadow-lg);max-width:420px}
+.sim-card h4{color:#93c5fd;margin-bottom:.5rem;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em}
+.sim-card .row{display:flex;justify-content:space-between;margin:.3rem 0}
+.sim-card .lbl{opacity:.7;font-size:.75rem}
+.sim-card .val{font-weight:700}
+.sim-doc{background:#fffbeb;border:2px solid #fbbf24;border-radius:var(--radius);padding:1rem;margin:.8rem 0;font-size:.85rem}
+.sim-doc h4{color:#92400e;margin-bottom:.4rem}
+.cms-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.5rem;margin:.8rem 0}
+.cms-box{background:var(--surface);border:2px solid var(--border);border-radius:8px;padding:.6rem;cursor:pointer;transition:all .2s;text-align:center;font-size:.8rem}
+.cms-box:hover{border-color:var(--primary);transform:translateY(-2px);box-shadow:var(--shadow)}
+.cms-box.sel{border-color:var(--primary);background:#eff6ff}
+.cms-box .bnum{font-weight:800;font-size:1rem;color:var(--primary)}
+.cms-box .bdesc{color:var(--text2);font-size:.72rem;margin-top:.15rem}
+.badge{display:flex;align-items:center;gap:.3rem;padding:.4rem .6rem;border-radius:16px;font-size:.78rem;font-weight:600;border:2px solid var(--border);opacity:.4;transition:all .3s}
+.badge.earned{opacity:1;border-color:var(--accent);background:#fffbeb;animation:bpop .5s}
+@keyframes bpop{50%{transform:scale(1.1)}}
+.badges{display:flex;flex-wrap:wrap;gap:.6rem;margin:.8rem 0}
+.timer{font-size:1.8rem;font-weight:800;text-align:center;font-variant-numeric:tabular-nums;color:var(--primary-dark)}
+.timer.warn{color:var(--warn)}
+.timer.danger{color:var(--error);animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.5}}
+.toast{position:fixed;bottom:16px;right:16px;padding:.6rem 1rem;border-radius:var(--radius);color:#fff;font-weight:600;font-size:.85rem;z-index:200;box-shadow:var(--shadow-lg);animation:slideU .3s,fadeO .3s 2s forwards}
+@keyframes slideU{from{transform:translateY(16px);opacity:0}}
+@keyframes fadeO{to{opacity:0;transform:translateY(-8px)}}
+.footer{text-align:center;padding:1.5rem .8rem;background:var(--surface);border-top:1px solid var(--border);color:var(--text2);font-size:.82rem}
+.footer strong{color:var(--primary)}
+.flash{background:var(--surface);border:2px solid var(--primary-light);border-radius:var(--radius);padding:1.2rem;text-align:center;min-height:90px;display:flex;flex-direction:column;justify-content:center;cursor:pointer;transition:all .3s;margin-bottom:.8rem}
+.flash:hover{box-shadow:var(--shadow-lg)}
+@media(max-width:600px){.tab-btn{font-size:.68rem;padding:.5rem .6rem}.card{padding:.9rem}h2{font-size:1.2rem}.cms-grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr))}}
+</style>
+</head>
+<body>
+<header class="header">
+<h1>📋 CMS-1500 Claim Form Interactive Simulation Lab</h1>
+<div class="hstats">
+<span>⭐ Score: <b id="score">0</b></span>
+<span>🔥 Streak: <b id="streak">0</b></span>
+<span>🏅 Badges: <b id="badgeCt">0</b>/8</span>
+</div>
+<div class="pbar"><div class="pbar-fill" id="pbar"></div></div>
+</header>
+<nav class="tabs" id="tabs">
+<button class="tab-btn active" onclick="showSec(0)">1. Welcome</button>
+<button class="tab-btn" onclick="showSec(1)">2. Meet CMS-1500</button>
+<button class="tab-btn" onclick="showSec(2)">3. Blocks 1-13</button>
+<button class="tab-btn" onclick="showSec(3)">4. Blocks 14-24</button>
+<button class="tab-btn" onclick="showSec(4)">5. Charges</button>
+<button class="tab-btn" onclick="showSec(5)">6. Blocks 25-33</button>
+<button class="tab-btn" onclick="showSec(6)">7. Sim Lab</button>
+<button class="tab-btn" onclick="showSec(7)">8. Full Claim</button>
+<button class="tab-btn" onclick="showSec(8)">9. Timed Quiz</button>
+<button class="tab-btn" onclick="showSec(9)">10. Review</button>
+</nav>
+<main class="main">
+<!-- SEC 0 -->
+<div class="sec active" id="s0">
+<div class="card card-a">
+<h2>Welcome to the CMS-1500 Simulation Lab!</h2>
+<p>This interactive lab teaches you how to <b>complete a CMS-1500 claim form</b> like a real medical billing professional. You'll learn by doing — filling in fields, reading insurance cards, and making real decisions.</p>
+<div style="display:flex;gap:.4rem;flex-wrap:wrap;margin:.7rem 0">
+<span class="tag tag-b">Hands-On</span><span class="tag tag-p">Simulation</span><span class="tag tag-g">Scored</span><span class="tag tag-r">Exam-Ready</span>
+</div>
+</div>
+<div class="card">
+<h3>How This Lab Works</h3>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">📋 Work through each tab in order <span>+</span></div><div class="acc-b">Each section builds on the last. Start at Tab 1 and go in order. You can always go back to review.</div></div>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">⭐ Earn points for correct answers <span>+</span></div><div class="acc-b">Every correct answer earns 10 points. Build streaks for bonus points. Read all feedback — even when you get it right!</div></div>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">📝 Practice filling in form fields <span>+</span></div><div class="acc-b">Several sections have simulated form fields. Type your answer and check it. This mimics real-world claim entry.</div></div>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">⏱ Timed challenge at the end <span>+</span></div><div class="acc-b">After learning all sections, test yourself in Tab 9. It pulls questions from everything you've learned.</div></div>
+</div>
+<div class="badges" id="badgeArea">
+<div class="badge" id="b-welcome">🌟 Getting Started</div>
+<div class="badge" id="b-form">📋 Form Explorer</div>
+<div class="badge" id="b-patient">🪪 Patient Pro</div>
+<div class="badge" id="b-clinical">🏥 Clinical Coder</div>
+<div class="badge" id="b-charges">💰 Charge Master</div>
+<div class="badge" id="b-provider">🩺 Provider Expert</div>
+<div class="badge" id="b-sim">🔬 Sim Star</div>
+<div class="badge" id="b-timed">⚡ Speed Biller</div>
+</div>
+<div style="text-align:center;margin-top:1.2rem">
+<button class="btn btn-p" onclick="showSec(1);earnBadge('welcome')" style="font-size:1rem;padding:.8rem 1.8rem">🚀 Start Learning</button>
+</div>
+</div>
+<!-- SEC 1 -->
+<div class="sec" id="s1">
+<h2>Meet the CMS-1500 Form</h2>
+<div class="quiz" id="q_m0"></div>
+<div id="m_info" style="display:none">
+<div class="card card-i">
+<h3>What is the CMS-1500?</h3>
+<p>The <b>CMS-1500</b> (also called HCFA-1500) is the <span class="hl">standard paper claim form</span> used to bill Medicare, Medicaid, and most commercial insurance carriers for professional (non-facility) services.</p>
+<p><b>Current version:</b> CMS-1500 (02/12)</p>
+<p>Even though most claims are submitted electronically, the CMS-1500 is the visual standard that maps to the electronic 837P transaction. As a biller, you need to know every box.</p>
+</div>
+<div class="card">
+<h3>The Three Sections</h3>
+<p>The form has <b>33 numbered boxes</b> organized into three main areas:</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.6rem;margin:.6rem 0">
+<div style="background:#dbeafe;padding:.8rem;border-radius:8px;border-left:4px solid var(--primary)"><b>Boxes 1–13</b><br>Patient & Insurance Info<br><small style="color:var(--text2)">Who is the patient? Who is paying?</small></div>
+<div style="background:#ede9fe;padding:.8rem;border-radius:8px;border-left:4px solid var(--secondary)"><b>Boxes 14–24</b><br>Clinical & Services<br><small style="color:var(--text2)">What happened? What was done?</small></div>
+<div style="background:#dcfce7;padding:.8rem;border-radius:8px;border-left:4px solid var(--accent3)"><b>Boxes 25–33</b><br>Provider & Billing<br><small style="color:var(--text2)">Who did it? Where? How to pay?</small></div>
+</div>
+</div>
+<div class="card">
+<h3>🖱 Click a Block to Learn About It</h3>
+<p>Tap any block to see what goes there and where you'd find that info.</p>
+<div class="cms-grid" id="cmsGrid"></div>
+<div id="boxDetail" class="card card-a" style="display:none"></div>
+</div>
+<div class="quiz" id="q_m1"></div>
+<div class="quiz" id="q_m2"></div>
+<div class="quiz" id="q_m3"></div>
+<div id="m_done" style="display:none" class="card card-s">
+<h3>✅ Section Complete!</h3>
+<p>You now know the CMS-1500's three sections and purpose.</p>
+<button class="btn btn-p" onclick="showSec(2);earnBadge('form')">Continue to Blocks 1–13 →</button>
+</div>
+</div>
+</div>
+<!-- SEC 2 -->
+<div class="sec" id="s2">
+<h2>Patient & Insurance Blocks (1–13)</h2>
+<div class="card card-i">
+<h3>Where Does This Info Come From?</h3>
+<p>📋 <b>Patient registration/demographic form</b> — name, DOB, address, etc.</p>
+<p>🪪 <b>Insurance card</b> — plan name, ID number, group number, etc.</p>
+<p>⚠️ Not everything on the insurance card goes on the claim. You must know <b>what goes where</b> and what to ignore.</p>
+</div>
+<div class="sim-card">
+<h4>🪪 Sample Insurance Card</h4>
+<div class="row"><span class="lbl">Plan</span><span class="val">BlueCross BlueShield</span></div>
+<div class="row"><span class="lbl">Member</span><span class="val">JOHNSON, MARIA T</span></div>
+<div class="row"><span class="lbl">Member ID</span><span class="val">BCB882461035</span></div>
+<div class="row"><span class="lbl">Group #</span><span class="val">GRP-7742</span></div>
+<div class="row"><span class="lbl">DOB</span><span class="val">03/15/1985</span></div>
+<div class="row"><span class="lbl">Copay</span><span class="val">$30 Office / $250 ER</span></div>
+<div class="row"><span class="lbl">RxBin</span><span class="val">004336</span></div>
+<div class="row"><span class="lbl">Effective</span><span class="val">01/01/2024</span></div>
+</div>
+<div class="card">
+<h3>Practice: Read the Card and Fill In</h3>
+<p>Using the insurance card above, type the correct value for each CMS-1500 field.</p>
+<div id="cardFields"></div>
+<button class="btn btn-p" onclick="checkCardFields()">✓ Check My Answers</button>
+<div id="cardFeedback" style="margin-top:.6rem"></div>
+</div>
+<div class="quiz" id="q_p1"></div>
+<div class="quiz" id="q_p2"></div>
+<div class="quiz" id="q_p3"></div>
+<div class="quiz" id="q_p4"></div>
+<div class="quiz" id="q_p5"></div>
+<div id="p_done" style="display:none" class="card card-s">
+<h3>✅ Section Complete!</h3>
+<p>You can now read an insurance card and fill in patient/insurance blocks correctly.</p>
+<button class="btn btn-p" onclick="showSec(3);earnBadge('patient')">Continue to Blocks 14–24 →</button>
+</div>
+</div>
+<!-- SEC 3 -->
+<div class="sec" id="s3">
+<h2>Clinical & Service Blocks (14–24)</h2>
+<div class="card card-i">
+<h3>The Heart of the Claim</h3>
+<p>Boxes 14–24 tell the payer <b>what happened clinically</b> and <b>what services were provided</b>. This is where medical necessity is demonstrated.</p>
+</div>
+<div class="card">
+<h3>Key Blocks</h3>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">Box 14: Date of Illness/Injury Onset <span>+</span></div><div class="acc-b">The date the patient's current condition started. Found in the provider's note or patient history. Use MM/DD/YYYY format.</div></div>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">Box 17: Referring Provider <span>+</span></div><div class="acc-b">Name of the referring or ordering provider, if applicable. Not always required — only when another provider referred the patient.</div></div>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">Box 21: Diagnosis Codes (ICD-10-CM) <span>+</span></div><div class="acc-b">Up to 12 diagnosis codes that justify the services billed. Listed with letter pointers A–L. These come from the provider's documentation and must support medical necessity.</div></div>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">Box 24: Service Lines (Most Important!) <span>+</span></div><div class="acc-b">Each line has: <b>24A</b> Date of Service, <b>24B</b> Place of Service, <b>24D</b> CPT/HCPC code, <b>24E</b> Diagnosis Pointer (letter), <b>24F</b> Charges, <b>24G</b> Units.</div></div>
+</div>
+<div class="sim-doc">
+<h4>📄 Sample Provider Note</h4>
+<p><b>Date of Service:</b> 03/10/2025</p>
+<p><b>Chief Complaint:</b> Sore throat and fever for 3 days</p>
+<p><b>History:</b> Patient also has history of hypertension (controlled) and seasonal allergies. Smokes 1 pack/day.</p>
+<p><b>Assessment:</b> Acute pharyngitis (J02.9)</p>
+<p><b>Plan:</b> Rapid strep test performed. Prescribed amoxicillin. Follow up in 1 week if no improvement.</p>
+<p><b>Procedures:</b><br>99213 — Office visit, est., level 3 — $110.00<br>87880 — Rapid strep test — $25.00</p>
+<p><b>Place of Service:</b> Office (11)</p>
+</div>
+<div class="card"><h3>Practice: What Goes on the Claim?</h3><p>Answer based on the provider note above.</p></div>
+<div class="quiz" id="q_c1"></div>
+<div class="quiz" id="q_c2"></div>
+<div class="quiz" id="q_c3"></div>
+<div class="quiz" id="q_c4"></div>
+<div class="quiz" id="q_c5"></div>
+<div class="quiz" id="q_c6"></div>
+<div id="c_done" style="display:none" class="card card-s">
+<h3>✅ Section Complete!</h3>
+<p>You can now read a provider note and extract what goes in Boxes 14–24.</p>
+<button class="btn btn-p" onclick="showSec(4);earnBadge('clinical')">Continue to Charges →</button>
+</div>
+</div>
+<!-- SEC 4 -->
+<div class="sec" id="s4">
+<h2>Charges & Totals (Box 24F / Box 28)</h2>
+<div class="card card-i">
+<h3>Getting the Money Right</h3>
+<p>Each service line in Box 24 has a charge in <b>Box 24F</b>. Box 28 is the <b>total of all charges</b>. Getting this wrong delays payment.</p>
+</div>
+<div class="card">
+<h3>Practice: Calculate Total Charges</h3>
+<p>A patient had these services on 03/10/2025:</p>
+<table style="width:100%;border-collapse:collapse;margin:.6rem 0;font-size:.85rem">
+<tr style="background:var(--surface2)"><th style="padding:.5rem;text-align:left;border:1px solid var(--border)">CPT</th><th style="padding:.5rem;text-align:left;border:1px solid var(--border)">Description</th><th style="padding:.5rem;text-align:right;border:1px solid var(--border)">Units</th><th style="padding:.5rem;text-align:right;border:1px solid var(--border)">Charge</th></tr>
+<tr><td style="padding:.5rem;border:1px solid var(--border)">99213</td><td style="padding:.5rem;border:1px solid var(--border)">Office visit, est., level 3</td><td style="padding:.5rem;text-align:right;border:1px solid var(--border)">1</td><td style="padding:.5rem;text-align:right;border:1px solid var(--border)">$110.00</td></tr>
+<tr><td style="padding:.5rem;border:1px solid var(--border)">87880</td><td style="padding:.5rem;border:1px solid var(--border)">Rapid strep test</td><td style="padding:.5rem;text-align:right;border:1px solid var(--border)">1</td><td style="padding:.5rem;text-align:right;border:1px solid var(--border)">$25.00</td></tr>
+<tr><td style="padding:.5rem;border:1px solid var(--border)">36415</td><td style="padding:.5rem;border:1px solid var(--border)">Venipuncture</td><td style="padding:.5rem;text-align:right;border:1px solid var(--border)">1</td><td style="padding:.5rem;text-align:right;border:1px solid var(--border)">$15.00</td></tr>
+</table>
+<div class="form-field"><label>What is the total charge for Box 28?</label><input type="text" id="chargeCalc" placeholder="Enter amount (e.g. 150.00)"></div>
+<button class="btn btn-p" onclick="checkCharge()">Check Answer</button>
+<div id="chargeFb" class="qfb" style="margin-top:.5rem"></div>
+</div>
+<div class="quiz" id="q_ch1"></div>
+<div class="quiz" id="q_ch2"></div>
+<div class="quiz" id="q_ch3"></div>
+<div class="quiz" id="q_ch4"></div>
+<div id="ch_done" style="display:none" class="card card-s">
+<h3>✅ Section Complete!</h3>
+<p>You understand how charges are entered and totaled.</p>
+<button class="btn btn-p" onclick="showSec(5);earnBadge('charges')">Continue to Provider Blocks →</button>
+</div>
+</div>
+<!-- SEC 5 -->
+<div class="sec" id="s5">
+<h2>Provider & Billing Blocks (25–33)</h2>
+<div class="card card-i">
+<h3>Who Did the Work?</h3>
+<p>Boxes 25–33 identify the <b>provider</b>, <b>practice</b>, and <b>billing entity</b>. These come from the provider's office records, not the patient.</p>
+</div>
+<div class="card">
+<h3>Key Blocks</h3>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">Box 25: Federal Tax ID (EIN) <span>+</span></div><div class="acc-b">The provider's or practice's federal tax ID number. Usually an EIN (Employer Identification Number). Mark whether it's SSN or EIN.</div></div>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">Box 26: Patient Account Number <span>+</span></div><div class="acc-b">Optional. The practice's internal account number for the patient.</div></div>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">Box 27: Accept Assignment <span>+</span></div><div class="acc-b">Does the provider accept the insurance's allowed amount? "Yes" for participating providers.</div></div>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">Box 31: Provider Signature <span>+</span></div><div class="acc-b">The rendering provider's signature and date. "Signature on File" for electronic.</div></div>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">Box 32: Service Facility <span>+</span></div><div class="acc-b">Name and address where the service was performed. May differ from billing address.</div></div>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">Box 33: Billing Provider & NPI <span>+</span></div><div class="acc-b">Name, address, phone, and NPI of the billing provider/practice.</div></div>
+</div>
+<div class="sim-doc">
+<h4>🏥 Sample Provider Office Sheet</h4>
+<p><b>Practice:</b> Sunrise Family Medicine</p>
+<p><b>Address:</b> 450 Healthcare Blvd, Suite 200, Tampa, FL 33602</p>
+<p><b>Phone:</b> (813) 555-0142</p>
+<p><b>EIN:</b> 59-3847261</p>
+<p><b>Billing NPI:</b> 1234567890</p>
+<p><b>Rendering Provider:</b> Dr. Sarah Chen, MD</p>
+<p><b>Rendering NPI:</b> 9876543210</p>
+<p><b>Accepts Assignment:</b> Yes</p>
+<p><b>Office Manager:</b> Tom Rivera</p>
+<p><b>Fax:</b> (813) 555-0143</p>
+</div>
+<div class="card">
+<h3>Practice: Fill In Provider Blocks</h3>
+<div id="provFields"></div>
+<button class="btn btn-p" onclick="checkProvFields()">✓ Check My Answers</button>
+<div id="provFeedback" style="margin-top:.6rem"></div>
+</div>
+<div class="quiz" id="q_pr1"></div>
+<div class="quiz" id="q_pr2"></div>
+<div id="pr_done" style="display:none" class="card card-s">
+<h3>✅ Section Complete!</h3>
+<p>You can fill in the provider and billing blocks correctly.</p>
+<button class="btn btn-p" onclick="showSec(6);earnBadge('provider')">Continue to Simulation Lab →</button>
+</div>
+</div>
+<!-- SEC 6 -->
+<div class="sec" id="s6">
+<h2>🔬 Source Document Simulation Lab</h2>
+<div class="card card-w">
+<h3>Think Like a Biller</h3>
+<p>Below are source documents for a patient encounter. Decide <b>what goes on the CMS-1500</b> and what does <b>NOT</b>. Some information is a distractor!</p>
+</div>
+<div class="sim-card">
+<h4>🪪 Insurance Card</h4>
+<div class="row"><span class="lbl">Plan</span><span class="val">Aetna PPO</span></div>
+<div class="row"><span class="lbl">Member</span><span class="val">DAVIS, ROBERT A</span></div>
+<div class="row"><span class="lbl">Member ID</span><span class="val">AET-990321478</span></div>
+<div class="row"><span class="lbl">Group #</span><span class="val">EMP-5521</span></div>
+<div class="row"><span class="lbl">DOB</span><span class="val">07/22/1978</span></div>
+<div class="row"><span class="lbl">Copay</span><span class="val">$40 Specialist</span></div>
+<div class="row"><span class="lbl">PCP</span><span class="val">Dr. Williams</span></div>
+</div>
+<div class="sim-doc">
+<h4>📋 Patient Demographics</h4>
+<p><b>Name:</b> Robert A. Davis &nbsp; <b>DOB:</b> 07/22/1978 &nbsp; <b>Sex:</b> Male</p>
+<p><b>Address:</b> 312 Oak Lane, Tampa, FL 33610</p>
+<p><b>Phone:</b> (813) 555-9021</p>
+<p><b>Emergency Contact:</b> Lisa Davis (wife) — (813) 555-9022</p>
+<p><b>Employer:</b> Tampa Bay Shipping Co.</p>
+<p><b>Relationship to Insured:</b> Self</p>
+<p><b>Favorite Color:</b> Blue</p>
+</div>
+<div class="sim-doc">
+<h4>📄 Provider Note</h4>
+<p><b>DOS:</b> 04/02/2025 &nbsp; <b>POS:</b> Office (11)</p>
+<p><b>CC:</b> Low back pain for 2 weeks, started after lifting heavy boxes at work on 03/19/2025.</p>
+<p><b>History:</b> Smoker. History of GERD. Takes omeprazole. Enjoys fishing on weekends.</p>
+<p><b>Assessment:</b> Lumbago (M54.5)</p>
+<p><b>Plan:</b> X-ray lumbar spine. Ibuprofen. Follow up 2 weeks.</p>
+<p><b>Procedures:</b><br>99214 — Office visit, est., level 4 — $155.00<br>72100 — X-ray lumbar spine, 2-3 views — $85.00</p>
+</div>
+<div class="card">
+<h3>Which Items Belong on the Claim?</h3>
+<p>Check all items that should go on the CMS-1500 for this encounter.</p>
+<div id="simCheckItems"></div>
+<button class="btn btn-p" onclick="checkSimItems()" style="margin-top:.6rem">✓ Check Selections</button>
+<div id="simFeedback" style="margin-top:.6rem"></div>
+</div>
+<div class="quiz" id="q_s1"></div>
+<div class="quiz" id="q_s2"></div>
+<div class="quiz" id="q_s3"></div>
+<div id="sim_done" style="display:none" class="card card-s">
+<h3>✅ Section Complete!</h3>
+<p>You can separate relevant from irrelevant information — a critical billing skill!</p>
+<button class="btn btn-p" onclick="showSec(7);earnBadge('sim')">Continue to Full Claim →</button>
+</div>
+</div>
+<!-- SEC 7 -->
+<div class="sec" id="s7">
+<h2>📝 Full Claim Completion Challenge</h2>
+<div class="card card-w">
+<h3>Complete the Entire CMS-1500</h3>
+<p>Use the documents below to fill in all required fields.</p>
+</div>
+<div class="sim-card">
+<h4>🪪 Insurance Card</h4>
+<div class="row"><span class="lbl">Plan</span><span class="val">United Healthcare</span></div>
+<div class="row"><span class="lbl">Member</span><span class="val">MARTINEZ, ELENA R</span></div>
+<div class="row"><span class="lbl">Member ID</span><span class="val">UHC-445896201</span></div>
+<div class="row"><span class="lbl">Group #</span><span class="val">FL-8834</span></div>
+<div class="row"><span class="lbl">DOB</span><span class="val">11/03/1990</span></div>
+</div>
+<div class="sim-doc">
+<h4>📋 Patient Info</h4>
+<p><b>Name:</b> Elena R. Martinez &nbsp; <b>DOB:</b> 11/03/1990 &nbsp; <b>Sex:</b> Female</p>
+<p><b>Address:</b> 785 Palm Ave, Orlando, FL 32801</p>
+<p><b>Relationship to insured:</b> Self</p>
+</div>
+<div class="sim-doc">
+<h4>📄 Provider Note — DOS: 04/05/2025</h4>
+<p><b>CC:</b> Annual wellness exam</p>
+<p><b>Assessment:</b> Encounter for general adult medical exam (Z00.00)</p>
+<p><b>Procedures:</b> 99395 — Preventive visit, est., 18-39 — $195.00</p>
+<p><b>POS:</b> Office (11)</p>
+</div>
+<div class="sim-doc">
+<h4>🏥 Provider Info</h4>
+<p><b>Practice:</b> Orlando Wellness Center</p>
+<p><b>Address:</b> 200 Health Park Dr, Orlando, FL 32806</p>
+<p><b>Phone:</b> (407) 555-0188 &nbsp; <b>EIN:</b> 58-2938471</p>
+<p><b>Billing NPI:</b> 1122334455</p>
+<p><b>Rendering:</b> Dr. James Park, MD &nbsp; <b>NPI:</b> 5566778899</p>
+</div>
+<div class="card">
+<h3>Fill In the Claim</h3>
+<div id="fullClaimFields"></div>
+<button class="btn btn-a2" onclick="checkFullClaim()" style="margin-top:.6rem;font-size:.95rem">📋 Submit & Check Claim</button>
+<div id="fullClaimFb" style="margin-top:.8rem"></div>
+</div>
+</div>
+<!-- SEC 8 -->
+<div class="sec" id="s8">
+<h2>⏱ Timed CMS-1500 Quiz</h2>
+<div id="timedStart" class="card" style="text-align:center">
+<h3>Ready for the Challenge?</h3>
+<p>20 questions. 10 minutes. Let's go!</p>
+<p style="margin:.8rem 0"><b>Best Score: <span id="bestTimedScore">0</span>/20</b></p>
+<button class="btn btn-a2" onclick="startTimed()" style="font-size:1rem;padding:.8rem 1.6rem">⚡ Start Challenge</button>
+</div>
+<div id="timedActive" style="display:none">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem">
+<div class="timer" id="timerDisp">10:00</div>
+<div><b>Score: <span id="timedScore">0</span>/20</b> 🔥<span id="timedStreak">0</span></div>
+</div>
+<div id="timedQ" class="card"></div>
+</div>
+<div id="timedResults" style="display:none" class="card">
+<h3>Challenge Complete!</h3>
+<div id="timedResCont"></div>
+<button class="btn btn-p" onclick="startTimed()" style="margin-top:.8rem">🔄 Try Again</button>
+<button class="btn btn-s" onclick="showSec(9)" style="margin-top:.8rem">Review Cards →</button>
+</div>
+</div>
+<!-- SEC 9 -->
+<div class="sec" id="s9">
+<h2>📝 Rapid Review</h2>
+<div class="card card-i"><p>Click each card to reveal the answer. These are the most tested concepts!</p></div>
+<div id="flashCont"></div>
+<div class="card" style="text-align:center;margin-top:1rem">
+<h3>🎓 You've Completed the Lab!</h3>
+<p>Go back and review any sections you need. Good luck on your CBSE exam!</p>
+<button class="btn btn-p" onclick="showSec(0)">Back to Home</button>
+</div>
+</div>
+</main>
+<footer class="footer">
+<p>Developed and Instructed by <strong>Hilary Homaii</strong></p>
+<p style="margin-top:.2rem;font-size:.72rem;color:var(--text3)">CMS-1500 Claim Form Interactive Simulation Lab</p>
+</footer>
+<script>
+let S={score:0,streak:0,best:0,badges:{},answered:{},timedBest:0};
+function $(id){return document.getElementById(id)}
+function showSec(i){document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));$('s'+i).classList.add('active');document.querySelectorAll('.tab-btn').forEach((b,j)=>b.classList.toggle('active',j===i));window.scrollTo({top:0})}
+function addScore(n){S.score+=n;S.streak++;if(S.streak>S.best)S.best=S.streak;$('score').textContent=S.score;$('streak').textContent=S.streak;if(S.streak>0&&S.streak%5===0)toast('🔥 '+S.streak+' streak!','var(--accent)');updPbar()}
+function resetStreak(){S.streak=0;$('streak').textContent=0}
+function earnBadge(id){if(S.badges[id])return;S.badges[id]=true;let el=$('b-'+id);if(el)el.classList.add('earned');$('badgeCt').textContent=Object.keys(S.badges).length;toast('🏅 Badge Earned!','var(--secondary)')}
+function updPbar(){$('pbar').style.width=Math.min(100,Object.keys(S.answered).length/50*100)+'%'}
+function toast(m,c){let t=document.createElement('div');t.className='toast';t.style.background=c||'var(--primary)';t.textContent=m;document.body.appendChild(t);setTimeout(()=>t.remove(),2500)}
+function toggleAcc(el){let b=el.nextElementSibling;let o=b.classList.toggle('open');el.querySelector('span').textContent=o?'−':'+'}
+
+function mkQuiz(cid,q,cb){let c=$(cid);if(!c)return;let h='<div class="qq">'+q.q+'</div><div class="qopts">';q.o.forEach((o,i)=>{h+='<button class="qo" onclick="hQ(this,\''+cid+'\','+q.a+','+i+')">'+o+'</button>'});h+='</div><div class="qfb" id="'+cid+'_fb"></div>';c.innerHTML=h;c._q=q;c._cb=cb}
+function hQ(btn,cid,a,ch){if(S.answered[cid])return;S.answered[cid]=true;let c=$(cid);c.querySelectorAll('.qo').forEach((b,i)=>{b.classList.add('dis');if(i===a)b.classList.add('ok');if(i===ch&&i!==a)b.classList.add('no')});let fb=$(cid+'_fb'),q=c._q;if(ch===a){fb.className='qfb show ok';fb.innerHTML='✅ Correct! +10<br>'+(q.r||'');addScore(10)}else{fb.className='qfb show no';fb.innerHTML='❌ '+(q.r||'');resetStreak()}if(c._cb)c._cb()}
+
+// SEC 1
+const boxInfo=[
+{n:'1',t:'Insurance Type',d:'Check the type of insurance: Medicare, Medicaid, Tricare, etc. Source: insurance card.'},
+{n:'1a',t:'Insured ID',d:'The insured\'s ID number. Source: insurance card (Member ID).'},
+{n:'2',t:'Patient Name',d:'Last, First, MI. Source: patient registration form.'},
+{n:'3',t:'DOB / Sex',d:'Patient date of birth and sex. Source: registration form.'},
+{n:'4',t:'Insured Name',d:'Name of the insured (may differ from patient). Source: registration form.'},
+{n:'5',t:'Patient Address',d:'Mailing address, city, state, zip, phone. Source: registration form.'},
+{n:'6',t:'Relationship',d:'Patient relationship to insured: Self, Spouse, Child, Other.'},
+{n:'7',t:'Insured Address',d:'Insured\'s address if different from patient.'},
+{n:'9',t:'Other Insured',d:'Secondary insurance information, if applicable.'},
+{n:'10',t:'Condition',d:'Is condition related to employment, auto accident, or other?'},
+{n:'11',t:'Policy/Group',d:'Insured\'s group or policy number. Source: insurance card.'},
+{n:'12',t:'Patient Sig',d:'Patient authorization. "Signature on File."'},
+{n:'13',t:'Insured Sig',d:'Authorizes payment to provider. "Signature on File."'},
+{n:'14',t:'Date of Illness',d:'Date current illness/injury began. Source: provider note.'},
+{n:'17',t:'Referring MD',d:'Referring or ordering provider name (if applicable).'},
+{n:'21',t:'Dx Codes',d:'ICD-10-CM diagnoses (up to 12). Source: provider assessment.'},
+{n:'23',t:'Prior Auth',d:'Prior authorization number if required by payer.'},
+{n:'24',t:'Service Lines',d:'Date, POS, CPT, DX pointer, charges, units per service.'},
+{n:'25',t:'Tax ID',d:'Provider EIN or SSN. Source: provider office records.'},
+{n:'26',t:'Patient Acct #',d:'Internal patient account number (optional).'},
+{n:'27',t:'Assignment',d:'Accept assignment? Yes = accepts allowed amount.'},
+{n:'28',t:'Total Charge',d:'Sum of all Box 24F line charges.'},
+{n:'29',t:'Amt Paid',d:'Amount patient already paid (e.g., copay collected).'},
+{n:'31',t:'Provider Sig',d:'Rendering provider signature and date.'},
+{n:'32',t:'Service Loc',d:'Where the service was performed (name & address).'},
+{n:'33',t:'Billing Info',d:'Billing provider name, address, phone, and NPI.'}
+];
+(function(){let g=$('cmsGrid');boxInfo.forEach(b=>{let d=document.createElement('div');d.className='cms-box';d.innerHTML='<div class="bnum">'+b.n+'</div><div class="bdesc">'+b.t+'</div>';d.onclick=()=>{document.querySelectorAll('.cms-box').forEach(x=>x.classList.remove('sel'));d.classList.add('sel');let det=$('boxDetail');det.style.display='block';det.innerHTML='<h4>Box '+b.n+': '+b.t+'</h4><p>'+b.d+'</p>'};g.appendChild(d)})})();
+
+mkQuiz('q_m0',{q:'What do you think the CMS-1500 form is used for?',o:['Ordering lab tests','Billing insurance for professional services','Scheduling appointments','Recording vital signs'],a:1,r:'The CMS-1500 is the standard form for billing insurance carriers for professional medical services.'},()=>{$('m_info').style.display='block'});
+mkQuiz('q_m1',{q:'Which boxes contain patient and insurance information?',o:['Boxes 1–13','Boxes 14–24','Boxes 25–33','All boxes'],a:0,r:'Boxes 1–13 cover patient demographics and insurance info.'});
+mkQuiz('q_m2',{q:'Where are the CPT codes and service details entered?',o:['Box 21','Box 24','Box 28','Box 33'],a:1,r:'Box 24 contains the service lines: dates, CPT codes, charges, units, and diagnosis pointers.'});
+mkQuiz('q_m3',{q:'What is the current version of the CMS-1500?',o:['CMS-1500 (01/05)','CMS-1500 (08/05)','CMS-1500 (02/12)','CMS-1500 (01/20)'],a:2,r:'The current version is CMS-1500 (02/12).'},()=>{$('m_done').style.display='block'});
+
+// SEC 2
+const cardAns=[{label:'Box 1a: Insured ID Number',answer:'BCB882461035'},{label:'Box 2: Patient Name (Last, First MI)',answer:'JOHNSON, MARIA T'},{label:'Box 3: Patient DOB',answer:'03/15/1985'},{label:'Box 11: Group Number',answer:'GRP-7742'}];
+(function(){let c=$('cardFields');cardAns.forEach((f,i)=>{c.innerHTML+='<div class="form-field"><label>'+f.label+'</label><input type="text" id="cf_'+i+'" placeholder="Type answer"></div>'})})();
+function checkCardFields(){let ok=true,h='';cardAns.forEach((f,i)=>{let inp=$('cf_'+i),v=inp.value.trim().toUpperCase(),a=f.answer.toUpperCase();if(v===a){inp.classList.remove('wrong');inp.classList.add('correct');h+='<p style="color:var(--success)">✅ '+f.label+'</p>'}else{inp.classList.remove('correct');inp.classList.add('wrong');h+='<p style="color:var(--error)">❌ '+f.label+': <b>'+f.answer+'</b></p>';ok=false}});$('cardFeedback').innerHTML=h;if(ok&&!S.answered['cf']){S.answered['cf']=true;addScore(20);toast('🎉 All correct!','var(--success)')}}
+
+mkQuiz('q_p1',{q:'The copay ($30 Office) from the insurance card — does it go on the CMS-1500?',o:['Yes, in Box 29','Yes, in Box 28','No, copay is not reported on the claim by the biller','Yes, in Box 24F'],a:2,r:'The copay amount is NOT entered on the CMS-1500. The practice collects it, but it\'s not part of the claim submission to insurance.'});
+mkQuiz('q_p2',{q:'The RxBin number on the insurance card is for:',o:['CMS-1500 Box 1a','Pharmacy claims only — not CMS-1500','Box 11 group number','Box 25 tax ID'],a:1,r:'RxBin is for pharmacy/prescription claims. It does NOT go on the CMS-1500.'});
+mkQuiz('q_p3',{q:'What box is the patient\'s relationship to the insured?',o:['Box 4','Box 5','Box 6','Box 7'],a:2,r:'Box 6 = patient\'s relationship to insured (Self, Spouse, Child, Other).'});
+mkQuiz('q_p4',{q:'If the patient IS the insured, Box 6 should say:',o:['Spouse','Child','Other','Self'],a:3,r:'When the patient is the policyholder, Box 6 = "Self."'});
+mkQuiz('q_p5',{q:'The "Effective" date from the insurance card goes in:',o:['Box 14','Box 11','It does NOT go on the CMS-1500','Box 3'],a:2,r:'The insurance effective date is NOT a CMS-1500 field. The payer already knows this.'},()=>{$('p_done').style.display='block'});
+
+// SEC 3
+mkQuiz('q_c1',{q:'From the provider note, which diagnosis goes in Box 21?',o:['Hypertension, GERD, and pharyngitis','Only acute pharyngitis (J02.9)','All medical history','Smoker status'],a:1,r:'Only the diagnosis that justifies today\'s services goes on the claim. Hypertension and GERD are not being treated today.'});
+mkQuiz('q_c2',{q:'The patient\'s smoking history — does it go on this claim?',o:['Yes, always report it','No, it\'s not the reason for the visit','Yes, in Box 10','Only if the patient has lung cancer'],a:1,r:'Smoking is social history. Unless the provider is treating/counseling on it today, it doesn\'t go on the claim.'});
+mkQuiz('q_c3',{q:'What CPT code goes on service line 1 in Box 24D?',o:['J02.9','99213','87880','Both 99213 and 87880'],a:1,r:'Box 24D is for CPT codes. Line 1 = 99213 (office visit). 87880 goes on line 2.'});
+mkQuiz('q_c4',{q:'What goes in Box 24E for CPT 99213?',o:['A (pointing to J02.9 in Box 21)','B','1','The full ICD code'],a:0,r:'Box 24E uses letter pointers (A, B, C...) matching Box 21 diagnoses. J02.9 is diagnosis A.'});
+mkQuiz('q_c5',{q:'What is the POS code for an office visit?',o:['21 (Inpatient Hospital)','11 (Office)','23 (Emergency Room)','22 (Outpatient Hospital)'],a:1,r:'POS 11 = physician\'s office. Goes in Box 24B.'});
+mkQuiz('q_c6',{q:'"Onset 3 days ago" on 03/10/2025 — what date goes in Box 14?',o:['03/10/2025','03/07/2025','03/13/2025','Leave blank'],a:1,r:'3 days before 03/10 = 03/07/2025. Box 14 = date of onset.'},()=>{$('c_done').style.display='block'});
+
+// SEC 4
+function checkCharge(){let v=$('chargeCalc').value.trim().replace('$',''),fb=$('chargeFb');if(v==='150.00'||v==='150'){fb.className='qfb show ok';fb.innerHTML='✅ Correct! $110 + $25 + $15 = $150.00';$('chargeCalc').classList.add('correct');$('chargeCalc').classList.remove('wrong');if(!S.answered['chg']){S.answered['chg']=true;addScore(10)}}else{fb.className='qfb show no';fb.innerHTML='❌ Add: $110 + $25 + $15 = $150.00';$('chargeCalc').classList.add('wrong');$('chargeCalc').classList.remove('correct');resetStreak()}}
+mkQuiz('q_ch1',{q:'Box 28 (Total Charge) should equal:',o:['The copay','Sum of all Box 24F charges','Allowed amount','Patient balance'],a:1,r:'Box 28 = total of all individual line charges from Box 24F.'});
+mkQuiz('q_ch2',{q:'If a service is done twice on the same day, Box 24G =',o:['1','2','Charge × 2','Blank'],a:1,r:'Box 24G = number of units. If performed twice, enter 2.'});
+mkQuiz('q_ch3',{q:'Patient pays $30 copay at the visit. Where does it go?',o:['Box 24F','Box 28','Box 29','Not on the CMS-1500'],a:2,r:'Box 29 = amount paid by patient. Box 28 is still the TOTAL charge before any payments.'});
+mkQuiz('q_ch4',{q:'Line 1 = $155, Line 2 = $85. Box 28 = ?',o:['$155','$85','$240','$70'],a:2,r:'$155 + $85 = $240. Always add all service line charges.'},()=>{$('ch_done').style.display='block'});
+
+// SEC 5
+const provAns=[{label:'Box 25: EIN',answer:'59-3847261'},{label:'Box 33: Billing NPI',answer:'1234567890'},{label:'Box 33: Practice Name',answer:'SUNRISE FAMILY MEDICINE'},{label:'Box 33: Phone',answer:'(813) 555-0142'}];
+(function(){let c=$('provFields');provAns.forEach((f,i)=>{c.innerHTML+='<div class="form-field"><label>'+f.label+'</label><input type="text" id="pf_'+i+'" placeholder="Type answer"></div>'})})();
+function checkProvFields(){let ok=true,h='';provAns.forEach((f,i)=>{let inp=$('pf_'+i),v=inp.value.trim().toUpperCase().replace(/\s+/g,' '),a=f.answer.toUpperCase();if(v===a){inp.classList.remove('wrong');inp.classList.add('correct');h+='<p style="color:var(--success)">✅ '+f.label+'</p>'}else{inp.classList.remove('correct');inp.classList.add('wrong');h+='<p style="color:var(--error)">❌ '+f.label+': <b>'+f.answer+'</b></p>';ok=false}});$('provFeedback').innerHTML=h;if(ok&&!S.answered['pf']){S.answered['pf']=true;addScore(20);toast('🎉 Provider fields correct!','var(--success)')}}
+mkQuiz('q_pr1',{q:'The office manager\'s name goes on the CMS-1500.',o:['True','False'],a:1,r:'Only the rendering/billing providers and their NPIs go on the claim. The office manager is not reported.'});
+mkQuiz('q_pr2',{q:'If rendering and billing providers differ, Box 33 NPI is for:',o:['Rendering provider','Billing provider/practice','Both','Neither'],a:1,r:'Box 33 = billing provider NPI. Rendering provider NPI goes in Box 24J.'},()=>{$('pr_done').style.display='block'});
+
+// SEC 6
+const simItems=[{text:'Patient Name: Robert A. Davis',ok:true},{text:'DOB: 07/22/1978',ok:true},{text:'Member ID: AET-990321478',ok:true},{text:'Group #: EMP-5521',ok:true},{text:'Emergency Contact: Lisa Davis',ok:false},{text:'Favorite Color: Blue',ok:false},{text:'Employer: Tampa Bay Shipping Co.',ok:false},{text:'Diagnosis: M54.5 (Lumbago)',ok:true},{text:'CPT 99214: $155.00',ok:true},{text:'CPT 72100: $85.00',ok:true},{text:'History of GERD',ok:false},{text:'Takes omeprazole daily',ok:false},{text:'Enjoys fishing on weekends',ok:false},{text:'Date of onset: 03/19/2025',ok:true},{text:'POS: 11 (Office)',ok:true}];
+(function(){let c=$('simCheckItems');simItems.forEach((item,i)=>{let d=document.createElement('div');d.style.cssText='display:flex;align-items:center;gap:.5rem;padding:.5rem .7rem;margin:.3rem 0;border:2px solid var(--border);border-radius:8px;cursor:pointer;transition:all .2s;font-size:.88rem';d.innerHTML='<input type="checkbox" id="si_'+i+'" style="width:18px;height:18px;cursor:pointer"><label for="si_'+i+'" style="cursor:pointer;flex:1">'+item.text+'</label>';d.onclick=e=>{if(e.target.tagName!=='INPUT'){$('si_'+i).checked=!$('si_'+i).checked}};c.appendChild(d)})})();
+function checkSimItems(){let ct=0;simItems.forEach((item,i)=>{let ch=$('si_'+i).checked,p=$('si_'+i).closest('div');if(ch===item.ok){ct++;p.style.borderColor='var(--success)';p.style.background='#f0fdf4'}else{p.style.borderColor='var(--error)';p.style.background='#fff1f2'}});$('simFeedback').innerHTML='<p><b>'+ct+'/'+simItems.length+' correct</b></p><p style="font-size:.85rem;color:var(--text2)">Emergency contact, favorite color, employer, GERD history, medications, and hobbies are NOT reported on the CMS-1500. Only patient demographics, insurance info, diagnoses related to today\'s visit, services, and clinical dates belong on the claim.</p>';if(ct>=12&&!S.answered['sim']){S.answered['sim']=true;addScore(20);toast('Great job!','var(--success)')}}
+mkQuiz('q_s1',{q:'The patient\'s employer goes on the CMS-1500 for a standard insurance claim.',o:['True — Box 11c','False — not required for most claims'],a:1,r:'For standard insurance claims, employer is typically not required. It may apply for workers\' comp but not routine billing.'});
+mkQuiz('q_s2',{q:'GERD is in the history but patient is seen for back pain. List GERD in Box 21?',o:['Yes, always list all diagnoses','No, only list diagnoses for today\'s services'],a:1,r:'Only report diagnoses supporting the services billed today.'});
+mkQuiz('q_s3',{q:'Onset date 03/19/2025 goes in:',o:['Box 3','Box 14','Box 15','Box 24A'],a:1,r:'Box 14 = date of onset of current illness/injury.'},()=>{$('sim_done').style.display='block'});
+
+// SEC 7
+const fcAns=[{l:'Box 1a: Insured ID',a:'UHC-445896201'},{l:'Box 2: Patient Name',a:'MARTINEZ, ELENA R'},{l:'Box 3: DOB',a:'11/03/1990'},{l:'Box 3: Sex',a:'F',t:'select',opts:['M','F']},{l:'Box 5: Address',a:'785 PALM AVE, ORLANDO, FL 32801'},{l:'Box 6: Relationship',a:'SELF',t:'select',opts:['Self','Spouse','Child','Other']},{l:'Box 11: Group #',a:'FL-8834'},{l:'Box 21A: Diagnosis',a:'Z00.00'},{l:'Box 24A: Date of Service',a:'04/05/2025'},{l:'Box 24B: POS',a:'11'},{l:'Box 24D: CPT',a:'99395'},{l:'Box 24E: DX Pointer',a:'A'},{l:'Box 24F: Charge',a:'195.00'},{l:'Box 24G: Units',a:'1'},{l:'Box 25: EIN',a:'58-2938471'},{l:'Box 28: Total Charge',a:'195.00'},{l:'Box 33: Billing NPI',a:'1122334455'}];
+(function(){let c=$('fullClaimFields');fcAns.forEach((f,i)=>{if(f.t==='select'){let o=f.opts.map(x=>'<option value="'+x.toUpperCase()+'">'+x+'</option>').join('');c.innerHTML+='<div class="form-field"><label>'+f.l+'</label><select id="fc_'+i+'"><option value="">Select...</option>'+o+'</select></div>'}else{c.innerHTML+='<div class="form-field"><label>'+f.l+'</label><input type="text" id="fc_'+i+'" placeholder="Enter value"></div>'}})})();
+function checkFullClaim(){let ct=0,t=fcAns.length,h='';fcAns.forEach((f,i)=>{let el=$('fc_'+i),v=(el.value||'').trim().toUpperCase().replace(/\s+/g,' '),a=f.a.toUpperCase();if(v===a){ct++;el.classList.remove('wrong');el.classList.add('correct');h+='<p style="color:var(--success)">✅ '+f.l+'</p>'}else{el.classList.remove('correct');el.classList.add('wrong');h+='<p style="color:var(--error)">❌ '+f.l+': <b>'+f.a+'</b></p>'}});h='<h4>'+ct+'/'+t+' Correct ('+Math.round(ct/t*100)+'%)</h4>'+h;if(ct===t)h+='<p style="margin-top:.5rem;font-weight:700;color:var(--success)">🎉 Perfect claim!</p>';$('fullClaimFb').innerHTML=h;if(ct>=14&&!S.answered['fc']){S.answered['fc']=true;addScore(30);toast('Great claim work!','var(--success)')}}
+
+// SEC 8
+const tPool=[
+{q:'The CMS-1500 bills for:',o:['Inpatient facility services','Professional/outpatient services','Pharmacy claims','Dental services'],a:1,r:'CMS-1500 = professional services. Facilities use UB-04.'},
+{q:'Boxes 1–13 contain:',o:['Provider info','Patient & insurance info','Service details','Diagnosis codes'],a:1,r:'Boxes 1–13 = patient demographics & insurance.'},
+{q:'Box 21 is for:',o:['CPT codes','ICD-10-CM diagnosis codes','NPI numbers','Patient address'],a:1,r:'Box 21 = ICD-10-CM diagnosis codes (up to 12).'},
+{q:'Box 24D contains:',o:['Diagnosis pointer','CPT/HCPC code','Charges','Units'],a:1,r:'Box 24D = CPT or HCPC procedure code.'},
+{q:'Box 24E links services to diagnoses using:',o:['Numbers 1–12','Letters A–L','CPT codes','ICD codes'],a:1,r:'Box 24E = letter pointers (A–L) to Box 21 diagnoses.'},
+{q:'Box 28 contains:',o:['Amount paid','Total of all charges','Provider NPI','Group number'],a:1,r:'Box 28 = sum of all Box 24F charges.'},
+{q:'Box 33 contains:',o:['Patient info','Rendering provider only','Billing provider info & NPI','Diagnosis codes'],a:2,r:'Box 33 = billing provider name, address, phone, NPI.'},
+{q:'POS 11 means:',o:['Emergency room','Office','Inpatient hospital','Outpatient hospital'],a:1,r:'Place of Service 11 = physician\'s office.'},
+{q:'RxBin from insurance card goes on CMS-1500.',o:['True','False'],a:1,r:'RxBin = pharmacy claims only. Not CMS-1500.'},
+{q:'Emergency contact goes in which box?',o:['Box 4','Box 5','Box 9','None — not on CMS-1500'],a:3,r:'Emergency contacts are NOT reported on the CMS-1500.'},
+{q:'Patient is the insured. Box 6 =',o:['Spouse','Self','Child','Other'],a:1,r:'Patient = policyholder → Box 6 = Self.'},
+{q:'Box 14 is for:',o:['Date of service','Date of onset of illness/injury','Patient DOB','Date filed'],a:1,r:'Box 14 = date current illness/injury began.'},
+{q:'2 procedures on same date = how many service lines?',o:['1','2','Depends','None'],a:1,r:'Each CPT code gets its own service line.'},
+{q:'Box 25 contains:',o:['Patient SSN','Provider federal tax ID','Group #','Claim number'],a:1,r:'Box 25 = provider EIN or SSN.'},
+{q:'Box 24G is for:',o:['Charges','Diagnosis pointer','Units','POS'],a:2,r:'Box 24G = number of units.'},
+{q:'GERD in history, visit for ankle sprain. Box 21 gets:',o:['Both','Only ankle sprain dx','Only GERD','Neither'],a:1,r:'Only diagnoses related to today\'s services.'},
+{q:'Box 27 "Accept Assignment" means:',o:['Patient accepts responsibility','Provider accepts allowed amount','Insurance accepts claim','Hospital accepts patient'],a:1,r:'Accept Assignment = provider accepts payer\'s allowed amount.'},
+{q:'Electronic equivalent of CMS-1500:',o:['UB-04','837P','837I','ADA'],a:1,r:'837P (Professional) = electronic CMS-1500.'},
+{q:'Box 29 is for:',o:['Total charges','Amount patient already paid','Balance due','Insurance payment'],a:1,r:'Box 29 = amount patient has paid (e.g., copay).'},
+{q:'3 lines: $100, $50, $75. Box 28 =',o:['$100','$150','$225','$175'],a:2,r:'$100+$50+$75=$225.'},
+{q:'Box 31 is signed by:',o:['Patient','Insurance company','Rendering provider','Billing manager'],a:2,r:'Box 31 = rendering provider signature & date.'},
+{q:'CMS-1500 (02/12) allows up to how many diagnoses?',o:['4','8','12','Unlimited'],a:2,r:'Up to 12 ICD-10-CM codes in Box 21.'},
+{q:'"Signature on File" in Box 12 means:',o:['Not signed','Patient sig on file at office','Illegible','Electronic'],a:1,r:'Patient\'s signed authorization is on file at the practice.'},
+{q:'Box 1 asks for:',o:['Patient name','Type of insurance','Insured ID','Provider NPI'],a:1,r:'Box 1 = type of insurance.'},
+{q:'Box 32 is for:',o:['Billing provider address','Service facility location','Patient address','Insurance address'],a:1,r:'Box 32 = where service was performed.'}
+];
+
+let T={active:false,qs:[],idx:0,score:0,streak:0,timer:null,sec:600,ans:[]};
+function startTimed(){T={active:true,qs:tPool.sort(()=>Math.random()-.5).slice(0,20),idx:0,score:0,streak:0,timer:null,sec:600,ans:[]};$('timedStart').style.display='none';$('timedResults').style.display='none';$('timedActive').style.display='block';$('timedScore').textContent='0';$('timedStreak').textContent='0';showTQ();T.timer=setInterval(tick,1000)}
+function tick(){T.sec--;let m=Math.floor(T.sec/60),s=T.sec%60,d=$('timerDisp');d.textContent=m+':'+String(s).padStart(2,'0');d.className='timer'+(T.sec<=60?' danger':T.sec<=180?' warn':'');if(T.sec<=0)endT()}
+function showTQ(){if(T.idx>=T.qs.length){endT();return}let q=T.qs[T.idx],h='<div class="qq"><span class="tag tag-b">Q'+(T.idx+1)+'/20</span> '+q.q+'</div><div class="qopts">';q.o.forEach((o,i)=>{h+='<button class="qo" onclick="tAns('+i+','+q.a+')">'+o+'</button>'});h+='</div><div class="qfb" id="t_fb"></div>';$('timedQ').innerHTML=h}
+function tAns(ch,a){$('timedQ').querySelectorAll('.qo').forEach((b,i)=>{b.classList.add('dis');b.onclick=null;if(i===a)b.classList.add('ok');if(i===ch&&i!==a)b.classList.add('no')});let fb=$('t_fb'),q=T.qs[T.idx];if(ch===a){T.score++;T.streak++;fb.className='qfb show ok';fb.innerHTML='✅ Correct!';addScore(10)}else{T.streak=0;fb.className='qfb show no';fb.innerHTML='❌ '+q.r;resetStreak()}T.ans.push({q:q.q,ok:ch===a,ai:a,ci:ch,o:q.o});$('timedScore').textContent=T.score;$('timedStreak').textContent=T.streak;T.idx++;setTimeout(showTQ,1200)}
+function endT(){clearInterval(T.timer);T.active=false;$('timedActive').style.display='none';$('timedResults').style.display='block';if(T.score>S.timedBest)S.timedBest=T.score;$('bestTimedScore').textContent=S.timedBest;let p=Math.round(T.score/20*100),g=p>=90?'🏆 Master Biller!':p>=80?'🌟 Excellent!':p>=70?'👍 Good job!':'📚 Keep studying!';let h='<p style="font-size:1.4rem;font-weight:800;text-align:center">'+T.score+'/20 ('+p+'%)</p><p style="text-align:center">'+g+'</p>';let mi=T.ans.filter(a=>!a.ok);if(mi.length){h+='<h4 style="margin-top:.8rem">Missed:</h4>';mi.forEach(a=>{h+='<div class="card" style="margin:.4rem 0;padding:.6rem"><p style="font-weight:600">'+a.q+'</p><p style="color:var(--success)">✅ '+a.o[a.ai]+'</p><p style="color:var(--error)">Your answer: '+a.o[a.ci]+'</p></div>'})}$('timedResCont').innerHTML=h;if(p>=80)earnBadge('timed')}
+
+// SEC 9
+const fc=[{f:'Box 1',b:'Type of insurance (Medicare, Medicaid, etc.)'},{f:'Box 1a',b:'Insured ID number from insurance card'},{f:'Box 2',b:'Patient name: Last, First, MI'},{f:'Box 3',b:'Patient DOB and sex'},{f:'Box 6',b:'Relationship to insured (Self, Spouse, Child, Other)'},{f:'Box 11',b:'Insured\'s group/policy number'},{f:'Box 14',b:'Date of onset of illness/injury'},{f:'Box 17',b:'Referring/ordering provider'},{f:'Box 21',b:'ICD-10-CM diagnosis codes (up to 12, A–L)'},{f:'Box 24A',b:'Date(s) of service'},{f:'Box 24B',b:'Place of service code (11=Office)'},{f:'Box 24D',b:'CPT/HCPC procedure code'},{f:'Box 24E',b:'Diagnosis pointer letter (links to Box 21)'},{f:'Box 24F',b:'Charge for this service line'},{f:'Box 24G',b:'Number of units'},{f:'Box 25',b:'Provider EIN or SSN'},{f:'Box 27',b:'Accept Assignment? (Yes=accepts allowed amount)'},{f:'Box 28',b:'Total of all line charges'},{f:'Box 29',b:'Amount paid by patient'},{f:'Box 31',b:'Rendering provider signature & date'},{f:'Box 32',b:'Service facility name & address'},{f:'Box 33',b:'Billing provider name, address, phone, NPI'},{f:'RxBin',b:'NOT for CMS-1500. Pharmacy claims only.'},{f:'Copay on Card',b:'NOT in Box 24F. May go in Box 29 if collected.'},{f:'837P',b:'Electronic equivalent of the paper CMS-1500.'}];
+(function(){let c=$('flashCont');fc.forEach(f=>{let d=document.createElement('div');d.className='flash';d.innerHTML='<div style="font-size:1.1rem;font-weight:700;color:var(--primary-dark)">'+f.f+'</div><div class="fb" style="display:none;margin-top:.4rem;font-size:.9rem">'+f.b+'</div><small style="color:var(--text3);margin-top:.3rem">Click to flip</small>';d.onclick=()=>{let fb=d.querySelector('.fb'),vis=fb.style.display!=='none';fb.style.display=vis?'none':'block';d.style.borderColor=vis?'var(--primary-light)':'var(--success)'};c.appendChild(d)})})();
+</script>
+</body>
+</html></param>
+</div>
+<div class="tool-call" tool="create_file">
+<param name="description">Write the final CMS-1500 HTML file to output</param>
+<param name="path">/mnt/user-data/outputs/cms1500.html</param>
+<param name="file_content"><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CMS-1500 Claim Form Interactive Simulation Lab</title>
+<style>
+:root {
+  --primary: #2563eb;
+  --primary-light: #3b82f6;
+  --primary-dark: #1d4ed8;
+  --secondary: #7c3aed;
+  --accent: #f59e0b;
+  --accent2: #ec4899;
+  --accent3: #10b981;
+  --success: #22c563;
+  --error: #ef4444;
+  --warn: #f59e0b;
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --surface2: #f1f5f9;
+  --text: #1e293b;
+  --text2: #475569;
+  --text3: #94a8be;
+  --border: #e2e8f0;
+  --radius: 10px;
+  --shadow: 0 1px 3px rgba(0,0,0,.08);
+  --shadow-lg: 0 4px 16px rgba(0,0,0,.1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+.header{background:linear-gradient(135deg,var(--primary-dark),var(--primary),var(--secondary));color:#fff;padding:1rem;text-align:center;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(37,99,235,.3)}
+.header h1{font-size:clamp(.9rem,2.8vw,1.4rem);font-weight:800}
+.hstats{display:flex;justify-content:center;gap:1.2rem;margin-top:.4rem;font-size:.82rem;flex-wrap:wrap}
+.hstats span{display:flex;align-items:center;gap:.3rem}
+.pbar{width:100%;max-width:480px;margin:.5rem auto 0;background:rgba(255,255,255,.2);border-radius:20px;height:7px;overflow:hidden}
+.pbar-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--success));border-radius:20px;transition:width .5s;width:0%}
+.tabs{display:flex;overflow-x:auto;background:var(--surface);border-bottom:2px solid var(--border);padding:0 .3rem;scrollbar-width:thin}
+.tabs::-webkit-scrollbar{height:4px}
+.tabs::-webkit-scrollbar-thumb{background:var(--primary-light);border-radius:4px}
+.tab-btn{flex-shrink:0;padding:.65rem .8rem;border:none;background:none;font-size:.75rem;font-weight:600;color:var(--text2);cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;white-space:nowrap}
+.tab-btn:hover{color:var(--primary);background:rgba(37,99,235,.04)}
+.tab-btn.active{color:var(--primary);border-bottom-color:var(--primary)}
+.tab-btn.done{color:var(--success)}
+.tab-btn.done::after{content:' ✓'}
+.main{max-width:900px;margin:0 auto;padding:1.2rem .8rem 3rem}
+.sec{display:none;animation:fadeIn .3s}
+.sec.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card{background:var(--surface);border-radius:var(--radius);padding:1.3rem;margin-bottom:1.1rem;box-shadow:var(--shadow);border:1px solid var(--border)}
+.card-a{border-left:4px solid var(--primary)}
+.card-s{border-left:4px solid var(--success)}
+.card-w{border-left:4px solid var(--warn)}
+.card-i{border-left:4px solid var(--secondary)}
+h2{font-size:1.4rem;font-weight:800;margin-bottom:.8rem;color:var(--primary-dark)}
+h3{font-size:1.1rem;font-weight:700;margin-bottom:.6rem}
+h4{font-size:.95rem;font-weight:600;margin-bottom:.4rem;color:var(--text2)}
+p{margin-bottom:.6rem}
+.hl{background:linear-gradient(to right,#fef3c7,#fde68a);padding:.12em .4em;border-radius:4px;font-weight:600}
+.tag{display:inline-block;padding:.15em .5em;border-radius:16px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.tag-b{background:#dbeafe;color:#1d4ed8}
+.tag-p{background:#ede9fe;color:#6d28d9}
+.tag-g{background:#dcfce7;color:#15803d}
+.tag-r{background:#fee2e2;color:#b91c1c}
+.tag-y{background:#fef3c7;color:#92400e}
+.quiz{margin:1.1rem 0}
+.qq{font-weight:700;margin-bottom:.6rem;padding:.7rem;background:linear-gradient(135deg,#dbeafe,#ede9fe);border-radius:var(--radius);font-size:.92rem}
+.qopts{display:flex;flex-direction:column;gap:.4rem}
+.qo{padding:.65rem .9rem;border:2px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:all .2s;font-size:.88rem;background:var(--surface);text-align:left;font-weight:500}
+.qo:hover:not(.dis){border-color:var(--primary-light);background:#eff6ff;transform:translateX(3px)}
+.qo.ok{border-color:var(--success);background:#dcfce7;color:#15803d}
+.qo.no{border-color:var(--error);background:#fee2e2;color:#b91c1c}
+.qo.dis{cursor:default;opacity:.7}
+.qo.dis:hover{transform:none}
+.qfb{margin-top:.6rem;padding:.7rem;border-radius:var(--radius);font-size:.83rem;display:none}
+.qfb.show{display:block}
+.qfb.ok{background:#f0fdf4;border:1px solid #86efab;color:#15803d}
+.qfb.no{background:#fff1f2;border:1px solid #fca5a5;color:#b91c1c}
+.btn{display:inline-flex;align-items:center;gap:.4rem;padding:.6rem 1.1rem;border:none;border-radius:var(--radius);font-size:.88rem;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-p{background:var(--primary);color:#fff}
+.btn-p:hover{background:var(--primary-dark);transform:translateY(-1px)}
+.btn-s{background:var(--surface2);color:var(--text);border:1px solid var(--border)}
+.btn-g{background:var(--success);color:#fff}
+.btn-a{background:var(--accent);color:#fff}
+.btn-a2{background:var(--accent2);color:#fff}
+.acc-item{border:1px solid var(--border);border-radius:var(--radius);margin-bottom:.4rem;overflow:hidden}
+.acc-h{padding:.65rem .9rem;background:var(--surface2);cursor:pointer;font-weight:600;display:flex;justify-content:space-between;align-items:center;font-size:.9rem}
+.acc-h:hover{background:#e0e7ff}
+.acc-b{padding:0 .9rem;max-height:0;overflow:hidden;transition:all .3s}
+.acc-b.open{padding:.9rem;max-height:3000px}
+.form-field{display:flex;flex-direction:column;gap:.3rem;margin-bottom:.8rem}
+.form-field label{font-weight:600;font-size:.82rem;color:var(--text2)}
+.form-field input,.form-field select{padding:.5rem .7rem;border:2px solid var(--border);border-radius:6px;font-size:.88rem;transition:border .2s}
+.form-field input:focus,.form-field select:focus{outline:none;border-color:var(--primary)}
+.form-field input.correct,.form-field select.correct{border-color:var(--success);background:#f0fdf4}
+.form-field input.wrong,.form-field select.wrong{border-color:var(--error);background:#fff1f2}
+.sim-card{background:linear-gradient(135deg,#1e40af,#3730a3);color:#fff;border-radius:12px;padding:1.2rem;margin:.8rem 0;font-size:.85rem;box-shadow:var(--shadow-lg);max-width:420px}
+.sim-card h4{color:#93c5fd;margin-bottom:.5rem;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em}
+.sim-card .row{display:flex;justify-content:space-between;margin:.3rem 0}
+.sim-card .lbl{opacity:.7;font-size:.75rem}
+.sim-card .val{font-weight:700}
+.sim-doc{background:#fffbeb;border:2px solid #fbbf24;border-radius:var(--radius);padding:1rem;margin:.8rem 0;font-size:.85rem}
+.sim-doc h4{color:#92400e;margin-bottom:.4rem}
+.cms-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.5rem;margin:.8rem 0}
+.cms-box{background:var(--surface);border:2px solid var(--border);border-radius:8px;padding:.6rem;cursor:pointer;transition:all .2s;text-align:center;font-size:.8rem}
+.cms-box:hover{border-color:var(--primary);transform:translateY(-2px);box-shadow:var(--shadow)}
+.cms-box.sel{border-color:var(--primary);background:#eff6ff}
+.cms-box .bnum{font-weight:800;font-size:1rem;color:var(--primary)}
+.cms-box .bdesc{color:var(--text2);font-size:.72rem;margin-top:.15rem}
+.badge{display:flex;align-items:center;gap:.3rem;padding:.4rem .6rem;border-radius:16px;font-size:.78rem;font-weight:600;border:2px solid var(--border);opacity:.4;transition:all .3s}
+.badge.earned{opacity:1;border-color:var(--accent);background:#fffbeb;animation:bpop .5s}
+@keyframes bpop{50%{transform:scale(1.1)}}
+.badges{display:flex;flex-wrap:wrap;gap:.6rem;margin:.8rem 0}
+.timer{font-size:1.8rem;font-weight:800;text-align:center;font-variant-numeric:tabular-nums;color:var(--primary-dark)}
+.timer.warn{color:var(--warn)}
+.timer.danger{color:var(--error);animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.5}}
+.toast{position:fixed;bottom:16px;right:16px;padding:.6rem 1rem;border-radius:var(--radius);color:#fff;font-weight:600;font-size:.85rem;z-index:200;box-shadow:var(--shadow-lg);animation:slideU .3s,fadeO .3s 2s forwards}
+@keyframes slideU{from{transform:translateY(16px);opacity:0}}
+@keyframes fadeO{to{opacity:0;transform:translateY(-8px)}}
+.footer{text-align:center;padding:1.5rem .8rem;background:var(--surface);border-top:1px solid var(--border);color:var(--text2);font-size:.82rem}
+.footer strong{color:var(--primary)}
+.flash{background:var(--surface);border:2px solid var(--primary-light);border-radius:var(--radius);padding:1.2rem;text-align:center;min-height:90px;display:flex;flex-direction:column;justify-content:center;cursor:pointer;transition:all .3s;margin-bottom:.8rem}
+.flash:hover{box-shadow:var(--shadow-lg)}
+@media(max-width:600px){.tab-btn{font-size:.68rem;padding:.5rem .6rem}.card{padding:.9rem}h2{font-size:1.2rem}.cms-grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr))}}
+</style>
+</head>
+<body>
+<header class="header">
+<h1>📋 CMS-1500 Claim Form Interactive Simulation Lab</h1>
+<div class="hstats">
+<span>⭐ Score: <b id="score">0</b></span>
+<span>🔥 Streak: <b id="streak">0</b></span>
+<span>🏅 Badges: <b id="badgeCt">0</b>/8</span>
+</div>
+<div class="pbar"><div class="pbar-fill" id="pbar"></div></div>
+</header>
+<nav class="tabs" id="tabs">
+<button class="tab-btn active" onclick="showSec(0)">1. Welcome</button>
+<button class="tab-btn" onclick="showSec(1)">2. Meet CMS-1500</button>
+<button class="tab-btn" onclick="showSec(2)">3. Blocks 1-13</button>
+<button class="tab-btn" onclick="showSec(3)">4. Blocks 14-24</button>
+<button class="tab-btn" onclick="showSec(4)">5. Charges</button>
+<button class="tab-btn" onclick="showSec(5)">6. Blocks 25-33</button>
+<button class="tab-btn" onclick="showSec(6)">7. Sim Lab</button>
+<button class="tab-btn" onclick="showSec(7)">8. Full Claim</button>
+<button class="tab-btn" onclick="showSec(8)">9. Timed Quiz</button>
+<button class="tab-btn" onclick="showSec(9)">10. Review</button>
+</nav>
+<main class="main">
+<!-- SEC 0 -->
+<div class="sec active" id="s0">
+<div class="card card-a">
+<h2>Welcome to the CMS-1500 Simulation Lab!</h2>
+<p>This interactive lab teaches you how to <b>complete a CMS-1500 claim form</b> like a real medical billing professional. You'll learn by doing — filling in fields, reading insurance cards, and making real decisions.</p>
+<div style="display:flex;gap:.4rem;flex-wrap:wrap;margin:.7rem 0">
+<span class="tag tag-b">Hands-On</span><span class="tag tag-p">Simulation</span><span class="tag tag-g">Scored</span><span class="tag tag-r">Exam-Ready</span>
+</div>
+</div>
+<div class="card">
+<h3>How This Lab Works</h3>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">📋 Work through each tab in order <span>+</span></div><div class="acc-b">Each section builds on the last. Start at Tab 1 and go in order. You can always go back to review.</div></div>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">⭐ Earn points for correct answers <span>+</span></div><div class="acc-b">Every correct answer earns 10 points. Build streaks for bonus points. Read all feedback — even when you get it right!</div></div>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">📝 Practice filling in form fields <span>+</span></div><div class="acc-b">Several sections have simulated form fields. Type your answer and check it. This mimics real-world claim entry.</div></div>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">⏱ Timed challenge at the end <span>+</span></div><div class="acc-b">After learning all sections, test yourself in Tab 9. It pulls questions from everything you've learned.</div></div>
+</div>
+<div class="badges" id="badgeArea">
+<div class="badge" id="b-welcome">🌟 Getting Started</div>
+<div class="badge" id="b-form">📋 Form Explorer</div>
+<div class="badge" id="b-patient">🪪 Patient Pro</div>
+<div class="badge" id="b-clinical">🏥 Clinical Coder</div>
+<div class="badge" id="b-charges">💰 Charge Master</div>
+<div class="badge" id="b-provider">🩺 Provider Expert</div>
+<div class="badge" id="b-sim">🔬 Sim Star</div>
+<div class="badge" id="b-timed">⚡ Speed Biller</div>
+</div>
+<div style="text-align:center;margin-top:1.2rem">
+<button class="btn btn-p" onclick="showSec(1);earnBadge('welcome')" style="font-size:1rem;padding:.8rem 1.8rem">🚀 Start Learning</button>
+</div>
+</div>
+<!-- SEC 1 -->
+<div class="sec" id="s1">
+<h2>Meet the CMS-1500 Form</h2>
+<div class="quiz" id="q_m0"></div>
+<div id="m_info" style="display:none">
+<div class="card card-i">
+<h3>What is the CMS-1500?</h3>
+<p>The <b>CMS-1500</b> (also called HCFA-1500) is the <span class="hl">standard paper claim form</span> used to bill Medicare, Medicaid, and most commercial insurance carriers for professional (non-facility) services.</p>
+<p><b>Current version:</b> CMS-1500 (02/12)</p>
+<p>Even though most claims are submitted electronically, the CMS-1500 is the visual standard that maps to the electronic 837P transaction. As a biller, you need to know every box.</p>
+</div>
+<div class="card">
+<h3>The Three Sections</h3>
+<p>The form has <b>33 numbered boxes</b> organized into three main areas:</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.6rem;margin:.6rem 0">
+<div style="background:#dbeafe;padding:.8rem;border-radius:8px;border-left:4px solid var(--primary)"><b>Boxes 1–13</b><br>Patient & Insurance Info<br><small style="color:var(--text2)">Who is the patient? Who is paying?</small></div>
+<div style="background:#ede9fe;padding:.8rem;border-radius:8px;border-left:4px solid var(--secondary)"><b>Boxes 14–24</b><br>Clinical & Services<br><small style="color:var(--text2)">What happened? What was done?</small></div>
+<div style="background:#dcfce7;padding:.8rem;border-radius:8px;border-left:4px solid var(--accent3)"><b>Boxes 25–33</b><br>Provider & Billing<br><small style="color:var(--text2)">Who did it? Where? How to pay?</small></div>
+</div>
+</div>
+<div class="card">
+<h3>🖱 Click a Block to Learn About It</h3>
+<p>Tap any block to see what goes there and where you'd find that info.</p>
+<div class="cms-grid" id="cmsGrid"></div>
+<div id="boxDetail" class="card card-a" style="display:none"></div>
+</div>
+<div class="quiz" id="q_m1"></div>
+<div class="quiz" id="q_m2"></div>
+<div class="quiz" id="q_m3"></div>
+<div id="m_done" style="display:none" class="card card-s">
+<h3>✅ Section Complete!</h3>
+<p>You now know the CMS-1500's three sections and purpose.</p>
+<button class="btn btn-p" onclick="showSec(2);earnBadge('form')">Continue to Blocks 1–13 →</button>
+</div>
+</div>
+</div>
+<!-- SEC 2 -->
+<div class="sec" id="s2">
+<h2>Patient & Insurance Blocks (1–13)</h2>
+<div class="card card-i">
+<h3>Where Does This Info Come From?</h3>
+<p>📋 <b>Patient registration/demographic form</b> — name, DOB, address, etc.</p>
+<p>🪪 <b>Insurance card</b> — plan name, ID number, group number, etc.</p>
+<p>⚠️ Not everything on the insurance card goes on the claim. You must know <b>what goes where</b> and what to ignore.</p>
+</div>
+<div class="sim-card">
+<h4>🪪 Sample Insurance Card</h4>
+<div class="row"><span class="lbl">Plan</span><span class="val">BlueCross BlueShield</span></div>
+<div class="row"><span class="lbl">Member</span><span class="val">JOHNSON, MARIA T</span></div>
+<div class="row"><span class="lbl">Member ID</span><span class="val">BCB882461035</span></div>
+<div class="row"><span class="lbl">Group #</span><span class="val">GRP-7742</span></div>
+<div class="row"><span class="lbl">DOB</span><span class="val">03/15/1985</span></div>
+<div class="row"><span class="lbl">Copay</span><span class="val">$30 Office / $250 ER</span></div>
+<div class="row"><span class="lbl">RxBin</span><span class="val">004336</span></div>
+<div class="row"><span class="lbl">Effective</span><span class="val">01/01/2024</span></div>
+</div>
+<div class="card">
+<h3>Practice: Read the Card and Fill In</h3>
+<p>Using the insurance card above, type the correct value for each CMS-1500 field.</p>
+<div id="cardFields"></div>
+<button class="btn btn-p" onclick="checkCardFields()">✓ Check My Answers</button>
+<div id="cardFeedback" style="margin-top:.6rem"></div>
+</div>
+<div class="quiz" id="q_p1"></div>
+<div class="quiz" id="q_p2"></div>
+<div class="quiz" id="q_p3"></div>
+<div class="quiz" id="q_p4"></div>
+<div class="quiz" id="q_p5"></div>
+<div id="p_done" style="display:none" class="card card-s">
+<h3>✅ Section Complete!</h3>
+<p>You can now read an insurance card and fill in patient/insurance blocks correctly.</p>
+<button class="btn btn-p" onclick="showSec(3);earnBadge('patient')">Continue to Blocks 14–24 →</button>
+</div>
+</div>
+<!-- SEC 3 -->
+<div class="sec" id="s3">
+<h2>Clinical & Service Blocks (14–24)</h2>
+<div class="card card-i">
+<h3>The Heart of the Claim</h3>
+<p>Boxes 14–24 tell the payer <b>what happened clinically</b> and <b>what services were provided</b>. This is where medical necessity is demonstrated.</p>
+</div>
+<div class="card">
+<h3>Key Blocks</h3>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">Box 14: Date of Illness/Injury Onset <span>+</span></div><div class="acc-b">The date the patient's current condition started. Found in the provider's note or patient history. Use MM/DD/YYYY format.</div></div>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">Box 17: Referring Provider <span>+</span></div><div class="acc-b">Name of the referring or ordering provider, if applicable. Not always required — only when another provider referred the patient.</div></div>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">Box 21: Diagnosis Codes (ICD-10-CM) <span>+</span></div><div class="acc-b">Up to 12 diagnosis codes that justify the services billed. Listed with letter pointers A–L. These come from the provider's documentation and must support medical necessity.</div></div>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">Box 24: Service Lines (Most Important!) <span>+</span></div><div class="acc-b">Each line has: <b>24A</b> Date of Service, <b>24B</b> Place of Service, <b>24D</b> CPT/HCPC code, <b>24E</b> Diagnosis Pointer (letter), <b>24F</b> Charges, <b>24G</b> Units.</div></div>
+</div>
+<div class="sim-doc">
+<h4>📄 Sample Provider Note</h4>
+<p><b>Date of Service:</b> 03/10/2025</p>
+<p><b>Chief Complaint:</b> Sore throat and fever for 3 days</p>
+<p><b>History:</b> Patient also has history of hypertension (controlled) and seasonal allergies. Smokes 1 pack/day.</p>
+<p><b>Assessment:</b> Acute pharyngitis (J02.9)</p>
+<p><b>Plan:</b> Rapid strep test performed. Prescribed amoxicillin. Follow up in 1 week if no improvement.</p>
+<p><b>Procedures:</b><br>99213 — Office visit, est., level 3 — $110.00<br>87880 — Rapid strep test — $25.00</p>
+<p><b>Place of Service:</b> Office (11)</p>
+</div>
+<div class="card"><h3>Practice: What Goes on the Claim?</h3><p>Answer based on the provider note above.</p></div>
+<div class="quiz" id="q_c1"></div>
+<div class="quiz" id="q_c2"></div>
+<div class="quiz" id="q_c3"></div>
+<div class="quiz" id="q_c4"></div>
+<div class="quiz" id="q_c5"></div>
+<div class="quiz" id="q_c6"></div>
+<div id="c_done" style="display:none" class="card card-s">
+<h3>✅ Section Complete!</h3>
+<p>You can now read a provider note and extract what goes in Boxes 14–24.</p>
+<button class="btn btn-p" onclick="showSec(4);earnBadge('clinical')">Continue to Charges →</button>
+</div>
+</div>
+<!-- SEC 4 -->
+<div class="sec" id="s4">
+<h2>Charges & Totals (Box 24F / Box 28)</h2>
+<div class="card card-i">
+<h3>Getting the Money Right</h3>
+<p>Each service line in Box 24 has a charge in <b>Box 24F</b>. Box 28 is the <b>total of all charges</b>. Getting this wrong delays payment.</p>
+</div>
+<div class="card">
+<h3>Practice: Calculate Total Charges</h3>
+<p>A patient had these services on 03/10/2025:</p>
+<table style="width:100%;border-collapse:collapse;margin:.6rem 0;font-size:.85rem">
+<tr style="background:var(--surface2)"><th style="padding:.5rem;text-align:left;border:1px solid var(--border)">CPT</th><th style="padding:.5rem;text-align:left;border:1px solid var(--border)">Description</th><th style="padding:.5rem;text-align:right;border:1px solid var(--border)">Units</th><th style="padding:.5rem;text-align:right;border:1px solid var(--border)">Charge</th></tr>
+<tr><td style="padding:.5rem;border:1px solid var(--border)">99213</td><td style="padding:.5rem;border:1px solid var(--border)">Office visit, est., level 3</td><td style="padding:.5rem;text-align:right;border:1px solid var(--border)">1</td><td style="padding:.5rem;text-align:right;border:1px solid var(--border)">$110.00</td></tr>
+<tr><td style="padding:.5rem;border:1px solid var(--border)">87880</td><td style="padding:.5rem;border:1px solid var(--border)">Rapid strep test</td><td style="padding:.5rem;text-align:right;border:1px solid var(--border)">1</td><td style="padding:.5rem;text-align:right;border:1px solid var(--border)">$25.00</td></tr>
+<tr><td style="padding:.5rem;border:1px solid var(--border)">36415</td><td style="padding:.5rem;border:1px solid var(--border)">Venipuncture</td><td style="padding:.5rem;text-align:right;border:1px solid var(--border)">1</td><td style="padding:.5rem;text-align:right;border:1px solid var(--border)">$15.00</td></tr>
+</table>
+<div class="form-field"><label>What is the total charge for Box 28?</label><input type="text" id="chargeCalc" placeholder="Enter amount (e.g. 150.00)"></div>
+<button class="btn btn-p" onclick="checkCharge()">Check Answer</button>
+<div id="chargeFb" class="qfb" style="margin-top:.5rem"></div>
+</div>
+<div class="quiz" id="q_ch1"></div>
+<div class="quiz" id="q_ch2"></div>
+<div class="quiz" id="q_ch3"></div>
+<div class="quiz" id="q_ch4"></div>
+<div id="ch_done" style="display:none" class="card card-s">
+<h3>✅ Section Complete!</h3>
+<p>You understand how charges are entered and totaled.</p>
+<button class="btn btn-p" onclick="showSec(5);earnBadge('charges')">Continue to Provider Blocks →</button>
+</div>
+</div>
+<!-- SEC 5 -->
+<div class="sec" id="s5">
+<h2>Provider & Billing Blocks (25–33)</h2>
+<div class="card card-i">
+<h3>Who Did the Work?</h3>
+<p>Boxes 25–33 identify the <b>provider</b>, <b>practice</b>, and <b>billing entity</b>. These come from the provider's office records, not the patient.</p>
+</div>
+<div class="card">
+<h3>Key Blocks</h3>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">Box 25: Federal Tax ID (EIN) <span>+</span></div><div class="acc-b">The provider's or practice's federal tax ID number. Usually an EIN (Employer Identification Number). Mark whether it's SSN or EIN.</div></div>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">Box 26: Patient Account Number <span>+</span></div><div class="acc-b">Optional. The practice's internal account number for the patient.</div></div>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">Box 27: Accept Assignment <span>+</span></div><div class="acc-b">Does the provider accept the insurance's allowed amount? "Yes" for participating providers.</div></div>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">Box 31: Provider Signature <span>+</span></div><div class="acc-b">The rendering provider's signature and date. "Signature on File" for electronic.</div></div>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">Box 32: Service Facility <span>+</span></div><div class="acc-b">Name and address where the service was performed. May differ from billing address.</div></div>
+<div class="acc-item"><div class="acc-h" onclick="toggleAcc(this)">Box 33: Billing Provider & NPI <span>+</span></div><div class="acc-b">Name, address, phone, and NPI of the billing provider/practice.</div></div>
+</div>
+<div class="sim-doc">
+<h4>🏥 Sample Provider Office Sheet</h4>
+<p><b>Practice:</b> Sunrise Family Medicine</p>
+<p><b>Address:</b> 450 Healthcare Blvd, Suite 200, Tampa, FL 33602</p>
+<p><b>Phone:</b> (813) 555-0142</p>
+<p><b>EIN:</b> 59-3847261</p>
+<p><b>Billing NPI:</b> 1234567890</p>
+<p><b>Rendering Provider:</b> Dr. Sarah Chen, MD</p>
+<p><b>Rendering NPI:</b> 9876543210</p>
+<p><b>Accepts Assignment:</b> Yes</p>
+<p><b>Office Manager:</b> Tom Rivera</p>
+<p><b>Fax:</b> (813) 555-0143</p>
+</div>
+<div class="card">
+<h3>Practice: Fill In Provider Blocks</h3>
+<div id="provFields"></div>
+<button class="btn btn-p" onclick="checkProvFields()">✓ Check My Answers</button>
+<div id="provFeedback" style="margin-top:.6rem"></div>
+</div>
+<div class="quiz" id="q_pr1"></div>
+<div class="quiz" id="q_pr2"></div>
+<div id="pr_done" style="display:none" class="card card-s">
+<h3>✅ Section Complete!</h3>
+<p>You can fill in the provider and billing blocks correctly.</p>
+<button class="btn btn-p" onclick="showSec(6);earnBadge('provider')">Continue to Simulation Lab →</button>
+</div>
+</div>
+<!-- SEC 6 -->
+<div class="sec" id="s6">
+<h2>🔬 Source Document Simulation Lab</h2>
+<div class="card card-w">
+<h3>Think Like a Biller</h3>
+<p>Below are source documents for a patient encounter. Decide <b>what goes on the CMS-1500</b> and what does <b>NOT</b>. Some information is a distractor!</p>
+</div>
+<div class="sim-card">
+<h4>🪪 Insurance Card</h4>
+<div class="row"><span class="lbl">Plan</span><span class="val">Aetna PPO</span></div>
+<div class="row"><span class="lbl">Member</span><span class="val">DAVIS, ROBERT A</span></div>
+<div class="row"><span class="lbl">Member ID</span><span class="val">AET-990321478</span></div>
+<div class="row"><span class="lbl">Group #</span><span class="val">EMP-5521</span></div>
+<div class="row"><span class="lbl">DOB</span><span class="val">07/22/1978</span></div>
+<div class="row"><span class="lbl">Copay</span><span class="val">$40 Specialist</span></div>
+<div class="row"><span class="lbl">PCP</span><span class="val">Dr. Williams</span></div>
+</div>
+<div class="sim-doc">
+<h4>📋 Patient Demographics</h4>
+<p><b>Name:</b> Robert A. Davis &nbsp; <b>DOB:</b> 07/22/1978 &nbsp; <b>Sex:</b> Male</p>
+<p><b>Address:</b> 312 Oak Lane, Tampa, FL 33610</p>
+<p><b>Phone:</b> (813) 555-9021</p>
+<p><b>Emergency Contact:</b> Lisa Davis (wife) — (813) 555-9022</p>
+<p><b>Employer:</b> Tampa Bay Shipping Co.</p>
+<p><b>Relationship to Insured:</b> Self</p>
+<p><b>Favorite Color:</b> Blue</p>
+</div>
+<div class="sim-doc">
+<h4>📄 Provider Note</h4>
+<p><b>DOS:</b> 04/02/2025 &nbsp; <b>POS:</b> Office (11)</p>
+<p><b>CC:</b> Low back pain for 2 weeks, started after lifting heavy boxes at work on 03/19/2025.</p>
+<p><b>History:</b> Smoker. History of GERD. Takes omeprazole. Enjoys fishing on weekends.</p>
+<p><b>Assessment:</b> Lumbago (M54.5)</p>
+<p><b>Plan:</b> X-ray lumbar spine. Ibuprofen. Follow up 2 weeks.</p>
+<p><b>Procedures:</b><br>99214 — Office visit, est., level 4 — $155.00<br>72100 — X-ray lumbar spine, 2-3 views — $85.00</p>
+</div>
+<div class="card">
+<h3>Which Items Belong on the Claim?</h3>
+<p>Check all items that should go on the CMS-1500 for this encounter.</p>
+<div id="simCheckItems"></div>
+<button class="btn btn-p" onclick="checkSimItems()" style="margin-top:.6rem">✓ Check Selections</button>
+<div id="simFeedback" style="margin-top:.6rem"></div>
+</div>
+<div class="quiz" id="q_s1"></div>
+<div class="quiz" id="q_s2"></div>
+<div class="quiz" id="q_s3"></div>
+<div id="sim_done" style="display:none" class="card card-s">
+<h3>✅ Section Complete!</h3>
+<p>You can separate relevant from irrelevant information — a critical billing skill!</p>
+<button class="btn btn-p" onclick="showSec(7);earnBadge('sim')">Continue to Full Claim →</button>
+</div>
+</div>
+<!-- SEC 7 -->
+<div class="sec" id="s7">
+<h2>📝 Full Claim Completion Challenge</h2>
+<div class="card card-w">
+<h3>Complete the Entire CMS-1500</h3>
+<p>Use the documents below to fill in all required fields.</p>
+</div>
+<div class="sim-card">
+<h4>🪪 Insurance Card</h4>
+<div class="row"><span class="lbl">Plan</span><span class="val">United Healthcare</span></div>
+<div class="row"><span class="lbl">Member</span><span class="val">MARTINEZ, ELENA R</span></div>
+<div class="row"><span class="lbl">Member ID</span><span class="val">UHC-445896201</span></div>
+<div class="row"><span class="lbl">Group #</span><span class="val">FL-8834</span></div>
+<div class="row"><span class="lbl">DOB</span><span class="val">11/03/1990</span></div>
+</div>
+<div class="sim-doc">
+<h4>📋 Patient Info</h4>
+<p><b>Name:</b> Elena R. Martinez &nbsp; <b>DOB:</b> 11/03/1990 &nbsp; <b>Sex:</b> Female</p>
+<p><b>Address:</b> 785 Palm Ave, Orlando, FL 32801</p>
+<p><b>Relationship to insured:</b> Self</p>
+</div>
+<div class="sim-doc">
+<h4>📄 Provider Note — DOS: 04/05/2025</h4>
+<p><b>CC:</b> Annual wellness exam</p>
+<p><b>Assessment:</b> Encounter for general adult medical exam (Z00.00)</p>
+<p><b>Procedures:</b> 99395 — Preventive visit, est., 18-39 — $195.00</p>
+<p><b>POS:</b> Office (11)</p>
+</div>
+<div class="sim-doc">
+<h4>🏥 Provider Info</h4>
+<p><b>Practice:</b> Orlando Wellness Center</p>
+<p><b>Address:</b> 200 Health Park Dr, Orlando, FL 32806</p>
+<p><b>Phone:</b> (407) 555-0188 &nbsp; <b>EIN:</b> 58-2938471</p>
+<p><b>Billing NPI:</b> 1122334455</p>
+<p><b>Rendering:</b> Dr. James Park, MD &nbsp; <b>NPI:</b> 5566778899</p>
+</div>
+<div class="card">
+<h3>Fill In the Claim</h3>
+<div id="fullClaimFields"></div>
+<button class="btn btn-a2" onclick="checkFullClaim()" style="margin-top:.6rem;font-size:.95rem">📋 Submit & Check Claim</button>
+<div id="fullClaimFb" style="margin-top:.8rem"></div>
+</div>
+</div>
+<!-- SEC 8 -->
+<div class="sec" id="s8">
+<h2>⏱ Timed CMS-1500 Quiz</h2>
+<div id="timedStart" class="card" style="text-align:center">
+<h3>Ready for the Challenge?</h3>
+<p>20 questions. 10 minutes. Let's go!</p>
+<p style="margin:.8rem 0"><b>Best Score: <span id="bestTimedScore">0</span>/20</b></p>
+<button class="btn btn-a2" onclick="startTimed()" style="font-size:1rem;padding:.8rem 1.6rem">⚡ Start Challenge</button>
+</div>
+<div id="timedActive" style="display:none">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem">
+<div class="timer" id="timerDisp">10:00</div>
+<div><b>Score: <span id="timedScore">0</span>/20</b> 🔥<span id="timedStreak">0</span></div>
+</div>
+<div id="timedQ" class="card"></div>
+</div>
+<div id="timedResults" style="display:none" class="card">
+<h3>Challenge Complete!</h3>
+<div id="timedResCont"></div>
+<button class="btn btn-p" onclick="startTimed()" style="margin-top:.8rem">🔄 Try Again</button>
+<button class="btn btn-s" onclick="showSec(9)" style="margin-top:.8rem">Review Cards →</button>
+</div>
+</div>
+<!-- SEC 9 -->
+<div class="sec" id="s9">
+<h2>📝 Rapid Review</h2>
+<div class="card card-i"><p>Click each card to reveal the answer. These are the most tested CMS-1500 concepts!</p></div>
+<div id="flashCont"></div>
+<div class="card" style="text-align:center;margin-top:1rem">
+<h3>🎓 You've Completed the Lab!</h3>
+<p>Go back and review any sections you need. Good luck on your CBSE exam!</p>
+<button class="btn btn-p" onclick="showSec(0)">Back to Home</button>
+</div>
+</div>
+</main>
+<footer class="footer">
+<p>Developed and Instructed by <strong>Hilary Homaii</strong></p>
+<p style="margin-top:.2rem;font-size:.72rem;color:var(--text3)">CMS-1500 Claim Form Interactive Simulation Lab</p>
+</footer>
+<script>
+let S={score:0,streak:0,best:0,badges:{},answered:{},timedBest:0};
+function $(id){return document.getElementById(id)}
+function showSec(i){document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));$('s'+i).classList.add('active');document.querySelectorAll('.tab-btn').forEach((b,j)=>b.classList.toggle('active',j===i));window.scrollTo({top:0})}
+function addScore(n){S.score+=n;S.streak++;if(S.streak>S.best)S.best=S.streak;$('score').textContent=S.score;$('streak').textContent=S.streak;if(S.streak>0&&S.streak%5===0)toast('🔥 '+S.streak+' streak!','var(--accent)');updPbar()}
+function resetStreak(){S.streak=0;$('streak').textContent=0}
+function earnBadge(id){if(S.badges[id])return;S.badges[id]=true;let el=$('b-'+id);if(el)el.classList.add('earned');$('badgeCt').textContent=Object.keys(S.badges).length;toast('🏅 Badge Earned!','var(--secondary)')}
+function updPbar(){$('pbar').style.width=Math.min(100,Object.keys(S.answered).length/50*100)+'%'}
+function toast(m,c){let t=document.createElement('div');t.className='toast';t.style.background=c||'var(--primary)';t.textContent=m;document.body.appendChild(t);setTimeout(()=>t.remove(),2500)}
+function toggleAcc(el){let b=el.nextElementSibling;let o=b.classList.toggle('open');el.querySelector('span').textContent=o?'−':'+'}
+
+function mkQuiz(cid,q,cb){let c=$(cid);if(!c)return;let h='<div class="qq">'+q.q+'</div><div class="qopts">';q.o.forEach((o,i)=>{h+='<button class="qo" onclick="hQ(this,\''+cid+'\','+q.a+','+i+')">'+o+'</button>'});h+='</div><div class="qfb" id="'+cid+'_fb"></div>';c.innerHTML=h;c._q=q;c._cb=cb}
+function hQ(btn,cid,a,ch){if(S.answered[cid])return;S.answered[cid]=true;let c=$(cid);c.querySelectorAll('.qo').forEach((b,i)=>{b.classList.add('dis');if(i===a)b.classList.add('ok');if(i===ch&&i!==a)b.classList.add('no')});let fb=$(cid+'_fb'),q=c._q;if(ch===a){fb.className='qfb show ok';fb.innerHTML='✅ Correct! +10<br>'+(q.r||'');addScore(10)}else{fb.className='qfb show no';fb.innerHTML='❌ '+(q.r||'');resetStreak()}if(c._cb)c._cb()}
+
+// SEC 1
+const boxInfo=[
+{n:'1',t:'Insurance Type',d:'Check the type of insurance: Medicare, Medicaid, Tricare, etc. Source: insurance card.'},
+{n:'1a',t:'Insured ID',d:'The insured\'s ID number. Source: insurance card (Member ID).'},
+{n:'2',t:'Patient Name',d:'Last, First, MI. Source: patient registration form.'},
+{n:'3',t:'DOB / Sex',d:'Patient date of birth and sex. Source: registration form.'},
+{n:'4',t:'Insured Name',d:'Name of the insured (may differ from patient). Source: registration form.'},
+{n:'5',t:'Patient Address',d:'Mailing address, city, state, zip, phone. Source: registration form.'},
+{n:'6',t:'Relationship',d:'Patient relationship to insured: Self, Spouse, Child, Other.'},
+{n:'7',t:'Insured Address',d:'Insured\'s address if different from patient.'},
+{n:'9',t:'Other Insured',d:'Secondary insurance information, if applicable.'},
+{n:'10',t:'Condition',d:'Is condition related to employment, auto accident, or other?'},
+{n:'11',t:'Policy/Group',d:'Insured\'s group or policy number. Source: insurance card.'},
+{n:'12',t:'Patient Sig',d:'Patient authorization. "Signature on File."'},
+{n:'13',t:'Insured Sig',d:'Authorizes payment to provider. "Signature on File."'},
+{n:'14',t:'Date of Illness',d:'Date current illness/injury began. Source: provider note.'},
+{n:'17',t:'Referring MD',d:'Referring or ordering provider name (if applicable).'},
+{n:'21',t:'Dx Codes',d:'ICD-10-CM diagnoses (up to 12). Source: provider assessment.'},
+{n:'23',t:'Prior Auth',d:'Prior authorization number if required by payer.'},
+{n:'24',t:'Service Lines',d:'Date, POS, CPT, DX pointer, charges, units per service.'},
+{n:'25',t:'Tax ID',d:'Provider EIN or SSN. Source: provider office records.'},
+{n:'26',t:'Patient Acct #',d:'Internal patient account number (optional).'},
+{n:'27',t:'Assignment',d:'Accept assignment? Yes = accepts allowed amount.'},
+{n:'28',t:'Total Charge',d:'Sum of all Box 24F line charges.'},
+{n:'29',t:'Amt Paid',d:'Amount patient already paid (e.g., copay collected).'},
+{n:'31',t:'Provider Sig',d:'Rendering provider signature and date.'},
+{n:'32',t:'Service Loc',d:'Where the service was performed (name & address).'},
+{n:'33',t:'Billing Info',d:'Billing provider name, address, phone, and NPI.'}
+];
+(function(){let g=$('cmsGrid');boxInfo.forEach(b=>{let d=document.createElement('div');d.className='cms-box';d.innerHTML='<div class="bnum">'+b.n+'</div><div class="bdesc">'+b.t+'</div>';d.onclick=()=>{document.querySelectorAll('.cms-box').forEach(x=>x.classList.remove('sel'));d.classList.add('sel');let det=$('boxDetail');det.style.display='block';det.innerHTML='<h4>Box '+b.n+': '+b.t+'</h4><p>'+b.d+'</p>'};g.appendChild(d)})})();
+
+mkQuiz('q_m0',{q:'What do you think the CMS-1500 form is used for?',o:['Ordering lab tests','Billing insurance for professional services','Scheduling appointments','Recording vital signs'],a:1,r:'The CMS-1500 is the standard form for billing insurance carriers for professional medical services.'},()=>{$('m_info').style.display='block'});
+mkQuiz('q_m1',{q:'Which boxes contain patient and insurance information?',o:['Boxes 1–13','Boxes 14–24','Boxes 25–33','All boxes'],a:0,r:'Boxes 1–13 cover patient demographics and insurance info.'});
+mkQuiz('q_m2',{q:'Where are the CPT codes and service details entered?',o:['Box 21','Box 24','Box 28','Box 33'],a:1,r:'Box 24 contains the service lines: dates, CPT codes, charges, units, and diagnosis pointers.'});
+mkQuiz('q_m3',{q:'What is the current version of the CMS-1500?',o:['CMS-1500 (01/05)','CMS-1500 (08/05)','CMS-1500 (02/12)','CMS-1500 (01/20)'],a:2,r:'The current version is CMS-1500 (02/12).'},()=>{$('m_done').style.display='block'});
+
+// SEC 2
+const cardAns=[{label:'Box 1a: Insured ID Number',answer:'BCB882461035'},{label:'Box 2: Patient Name (Last, First MI)',answer:'JOHNSON, MARIA T'},{label:'Box 3: Patient DOB',answer:'03/15/1985'},{label:'Box 11: Group Number',answer:'GRP-7742'}];
+(function(){let c=$('cardFields');cardAns.forEach((f,i)=>{c.innerHTML+='<div class="form-field"><label>'+f.label+'</label><input type="text" id="cf_'+i+'" placeholder="Type answer"></div>'})})();
+function checkCardFields(){let ok=true,h='';cardAns.forEach((f,i)=>{let inp=$('cf_'+i),v=inp.value.trim().toUpperCase(),a=f.answer.toUpperCase();if(v===a){inp.classList.remove('wrong');inp.classList.add('correct');h+='<p style="color:var(--success)">✅ '+f.label+'</p>'}else{inp.classList.remove('correct');inp.classList.add('wrong');h+='<p style="color:var(--error)">❌ '+f.label+': <b>'+f.answer+'</b></p>';ok=false}});$('cardFeedback').innerHTML=h;if(ok&&!S.answered['cf']){S.answered['cf']=true;addScore(20);toast('🎉 All correct!','var(--success)')}}
+
+mkQuiz('q_p1',{q:'The copay ($30 Office) from the insurance card — does it go on the CMS-1500?',o:['Yes, in Box 29','Yes, in Box 28','No, copay is not reported on the claim by the biller','Yes, in Box 24F'],a:2,r:'The copay amount is NOT entered on the CMS-1500. The practice collects it, but it\'s not part of the claim submission to insurance.'});
+mkQuiz('q_p2',{q:'The RxBin number on the insurance card is for:',o:['CMS-1500 Box 1a','Pharmacy claims only — not CMS-1500','Box 11 group number','Box 25 tax ID'],a:1,r:'RxBin is for pharmacy/prescription claims. It does NOT go on the CMS-1500.'});
+mkQuiz('q_p3',{q:'What box is the patient\'s relationship to the insured?',o:['Box 4','Box 5','Box 6','Box 7'],a:2,r:'Box 6 = patient\'s relationship to insured (Self, Spouse, Child, Other).'});
+mkQuiz('q_p4',{q:'If the patient IS the insured, Box 6 should say:',o:['Spouse','Child','Other','Self'],a:3,r:'When the patient is the policyholder, Box 6 = "Self."'});
+mkQuiz('q_p5',{q:'The "Effective" date from the insurance card goes in:',o:['Box 14','Box 11','It does NOT go on the CMS-1500','Box 3'],a:2,r:'The insurance effective date is NOT a CMS-1500 field. The payer already knows this.'},()=>{$('p_done').style.display='block'});
+
+// SEC 3
+mkQuiz('q_c1',{q:'From the provider note, which diagnosis goes in Box 21?',o:['Hypertension, GERD, and pharyngitis','Only acute pharyngitis (J02.9)','All medical history','Smoker status'],a:1,r:'Only the diagnosis that justifies today\'s services goes on the claim. Hypertension and GERD are not being treated today.'});
+mkQuiz('q_c2',{q:'The patient\'s smoking history — does it go on this claim?',o:['Yes, always report it','No, it\'s not the reason for the visit','Yes, in Box 10','Only if the patient has lung cancer'],a:1,r:'Smoking is social history. Unless the provider is treating/counseling on it today, it doesn\'t go on the claim.'});
+mkQuiz('q_c3',{q:'What CPT code goes on service line 1 in Box 24D?',o:['J02.9','99213','87880','Both 99213 and 87880'],a:1,r:'Box 24D is for CPT codes. Line 1 = 99213 (office visit). 87880 goes on line 2.'});
+mkQuiz('q_c4',{q:'What goes in Box 24E for CPT 99213?',o:['A (pointing to J02.9 in Box 21)','B','1','The full ICD code'],a:0,r:'Box 24E uses letter pointers (A, B, C...) matching Box 21 diagnoses. J02.9 is diagnosis A.'});
+mkQuiz('q_c5',{q:'What is the POS code for an office visit?',o:['21 (Inpatient Hospital)','11 (Office)','23 (Emergency Room)','22 (Outpatient Hospital)'],a:1,r:'POS 11 = physician\'s office. Goes in Box 24B.'});
+mkQuiz('q_c6',{q:'"Onset 3 days ago" on 03/10/2025 — what date goes in Box 14?',o:['03/10/2025','03/07/2025','03/13/2025','Leave blank'],a:1,r:'3 days before 03/10 = 03/07/2025. Box 14 = date of onset.'},()=>{$('c_done').style.display='block'});
+
+// SEC 4
+function checkCharge(){let v=$('chargeCalc').value.trim().replace('$',''),fb=$('chargeFb');if(v==='150.00'||v==='150'){fb.className='qfb show ok';fb.innerHTML='✅ Correct! $110 + $25 + $15 = $150.00';$('chargeCalc').classList.add('correct');$('chargeCalc').classList.remove('wrong');if(!S.answered['chg']){S.answered['chg']=true;addScore(10)}}else{fb.className='qfb show no';fb.innerHTML='❌ Add: $110 + $25 + $15 = $150.00';$('chargeCalc').classList.add('wrong');$('chargeCalc').classList.remove('correct');resetStreak()}}
+mkQuiz('q_ch1',{q:'Box 28 (Total Charge) should equal:',o:['The copay','Sum of all Box 24F charges','Allowed amount','Patient balance'],a:1,r:'Box 28 = total of all individual line charges from Box 24F.'});
+mkQuiz('q_ch2',{q:'If a service is done twice on the same day, Box 24G =',o:['1','2','Charge × 2','Blank'],a:1,r:'Box 24G = number of units. If performed twice, enter 2.'});
+mkQuiz('q_ch3',{q:'Patient pays $30 copay at the visit. Where does it go?',o:['Box 24F','Box 28','Box 29','Not on the CMS-1500'],a:2,r:'Box 29 = amount paid by patient. Box 28 is still the TOTAL charge before any payments.'});
+mkQuiz('q_ch4',{q:'Line 1 = $155, Line 2 = $85. Box 28 = ?',o:['$155','$85','$240','$70'],a:2,r:'$155 + $85 = $240. Always add all service line charges.'},()=>{$('ch_done').style.display='block'});
+
+// SEC 5
+const provAns=[{label:'Box 25: EIN',answer:'59-3847261'},{label:'Box 33: Billing NPI',answer:'1234567890'},{label:'Box 33: Practice Name',answer:'SUNRISE FAMILY MEDICINE'},{label:'Box 33: Phone',answer:'(813) 555-0142'}];
+(function(){let c=$('provFields');provAns.forEach((f,i)=>{c.innerHTML+='<div class="form-field"><label>'+f.label+'</label><input type="text" id="pf_'+i+'" placeholder="Type answer"></div>'})})();
+function checkProvFields(){let ok=true,h='';provAns.forEach((f,i)=>{let inp=$('pf_'+i),v=inp.value.trim().toUpperCase().replace(/\s+/g,' '),a=f.answer.toUpperCase();if(v===a){inp.classList.remove('wrong');inp.classList.add('correct');h+='<p style="color:var(--success)">✅ '+f.label+'</p>'}else{inp.classList.remove('correct');inp.classList.add('wrong');h+='<p style="color:var(--error)">❌ '+f.label+': <b>'+f.answer+'</b></p>';ok=false}});$('provFeedback').innerHTML=h;if(ok&&!S.answered['pf']){S.answered['pf']=true;addScore(20);toast('🎉 Provider fields correct!','var(--success)')}}
+mkQuiz('q_pr1',{q:'The office manager\'s name goes on the CMS-1500.',o:['True','False'],a:1,r:'Only the rendering/billing providers and their NPIs go on the claim. The office manager is not reported.'});
+mkQuiz('q_pr2',{q:'If rendering and billing providers differ, Box 33 NPI is for:',o:['Rendering provider','Billing provider/practice','Both','Neither'],a:1,r:'Box 33 = billing provider NPI. Rendering provider NPI goes in Box 24J.'},()=>{$('pr_done').style.display='block'});
+
+// SEC 6
+const simItems=[{text:'Patient Name: Robert A. Davis',ok:true},{text:'DOB: 07/22/1978',ok:true},{text:'Member ID: AET-990321478',ok:true},{text:'Group #: EMP-5521',ok:true},{text:'Emergency Contact: Lisa Davis',ok:false},{text:'Favorite Color: Blue',ok:false},{text:'Employer: Tampa Bay Shipping Co.',ok:false},{text:'Diagnosis: M54.5 (Lumbago)',ok:true},{text:'CPT 99214: $155.00',ok:true},{text:'CPT 72100: $85.00',ok:true},{text:'History of GERD',ok:false},{text:'Takes omeprazole daily',ok:false},{text:'Enjoys fishing on weekends',ok:false},{text:'Date of onset: 03/19/2025',ok:true},{text:'POS: 11 (Office)',ok:true}];
+(function(){let c=$('simCheckItems');simItems.forEach((item,i)=>{let d=document.createElement('div');d.style.cssText='display:flex;align-items:center;gap:.5rem;padding:.5rem .7rem;margin:.3rem 0;border:2px solid var(--border);border-radius:8px;cursor:pointer;transition:all .2s;font-size:.88rem';d.innerHTML='<input type="checkbox" id="si_'+i+'" style="width:18px;height:18px;cursor:pointer"><label for="si_'+i+'" style="cursor:pointer;flex:1">'+item.text+'</label>';d.onclick=e=>{if(e.target.tagName!=='INPUT'){$('si_'+i).checked=!$('si_'+i).checked}};c.appendChild(d)})})();
+function checkSimItems(){let ct=0;simItems.forEach((item,i)=>{let ch=$('si_'+i).checked,p=$('si_'+i).closest('div');if(ch===item.ok){ct++;p.style.borderColor='var(--success)';p.style.background='#f0fdf4'}else{p.style.borderColor='var(--error)';p.style.background='#fff1f2'}});$('simFeedback').innerHTML='<p><b>'+ct+'/'+simItems.length+' correct</b></p><p style="font-size:.85rem;color:var(--text2)">Emergency contact, favorite color, employer, GERD history, medications, and hobbies are NOT reported on the CMS-1500. Only patient demographics, insurance info, diagnoses related to today\'s visit, services, and clinical dates belong on the claim.</p>';if(ct>=12&&!S.answered['sim']){S.answered['sim']=true;addScore(20);toast('Great job!','var(--success)')}}
+mkQuiz('q_s1',{q:'The patient\'s employer goes on the CMS-1500 for a standard insurance claim.',o:['True — Box 11c','False — not required for most claims'],a:1,r:'For standard insurance claims, employer is typically not required. It may apply for workers\' comp but not routine billing.'});
+mkQuiz('q_s2',{q:'GERD is in the history but patient is seen for back pain. List GERD in Box 21?',o:['Yes, always list all diagnoses','No, only list diagnoses for today\'s services'],a:1,r:'Only report diagnoses supporting the services billed today.'});
+mkQuiz('q_s3',{q:'Onset date 03/19/2025 goes in:',o:['Box 3','Box 14','Box 15','Box 24A'],a:1,r:'Box 14 = date of onset of current illness/injury.'},()=>{$('sim_done').style.display='block'});
+
+// SEC 7
+const fcAns=[{l:'Box 1a: Insured ID',a:'UHC-445896201'},{l:'Box 2: Patient Name',a:'MARTINEZ, ELENA R'},{l:'Box 3: DOB',a:'11/03/1990'},{l:'Box 3: Sex',a:'F',t:'select',opts:['M','F']},{l:'Box 5: Address',a:'785 PALM AVE, ORLANDO, FL 32801'},{l:'Box 6: Relationship',a:'SELF',t:'select',opts:['Self','Spouse','Child','Other']},{l:'Box 11: Group #',a:'FL-8834'},{l:'Box 21A: Diagnosis',a:'Z00.00'},{l:'Box 24A: Date of Service',a:'04/05/2025'},{l:'Box 24B: POS',a:'11'},{l:'Box 24D: CPT',a:'99395'},{l:'Box 24E: DX Pointer',a:'A'},{l:'Box 24F: Charge',a:'195.00'},{l:'Box 24G: Units',a:'1'},{l:'Box 25: EIN',a:'58-2938471'},{l:'Box 28: Total Charge',a:'195.00'},{l:'Box 33: Billing NPI',a:'1122334455'}];
+(function(){let c=$('fullClaimFields');fcAns.forEach((f,i)=>{if(f.t==='select'){let o=f.opts.map(x=>'<option value="'+x.toUpperCase()+'">'+x+'</option>').join('');c.innerHTML+='<div class="form-field"><label>'+f.l+'</label><select id="fc_'+i+'"><option value="">Select...</option>'+o+'</select></div>'}else{c.innerHTML+='<div class="form-field"><label>'+f.l+'</label><input type="text" id="fc_'+i+'" placeholder="Enter value"></div>'}})})();
+function checkFullClaim(){let ct=0,t=fcAns.length,h='';fcAns.forEach((f,i)=>{let el=$('fc_'+i),v=(el.value||'').trim().toUpperCase().replace(/\s+/g,' '),a=f.a.toUpperCase();if(v===a){ct++;el.classList.remove('wrong');el.classList.add('correct');h+='<p style="color:var(--success)">✅ '+f.l+'</p>'}else{el.classList.remove('correct');el.classList.add('wrong');h+='<p style="color:var(--error)">❌ '+f.l+': <b>'+f.a+'</b></p>'}});h='<h4>'+ct+'/'+t+' Correct ('+Math.round(ct/t*100)+'%)</h4>'+h;if(ct===t)h+='<p style="margin-top:.5rem;font-weight:700;color:var(--success)">🎉 Perfect claim!</p>';$('fullClaimFb').innerHTML=h;if(ct>=14&&!S.answered['fc']){S.answered['fc']=true;addScore(30);toast('Great claim work!','var(--success)')}}
+
+// SEC 8
+const tPool=[
+{q:'The CMS-1500 bills for:',o:['Inpatient facility services','Professional/outpatient services','Pharmacy claims','Dental services'],a:1,r:'CMS-1500 = professional services. Facilities use UB-04.'},
+{q:'Boxes 1–13 contain:',o:['Provider info','Patient & insurance info','Service details','Diagnosis codes'],a:1,r:'Boxes 1–13 = patient demographics & insurance.'},
+{q:'Box 21 is for:',o:['CPT codes','ICD-10-CM diagnosis codes','NPI numbers','Patient address'],a:1,r:'Box 21 = ICD-10-CM diagnosis codes (up to 12).'},
+{q:'Box 24D contains:',o:['Diagnosis pointer','CPT/HCPC code','Charges','Units'],a:1,r:'Box 24D = CPT or HCPC procedure code.'},
+{q:'Box 24E links services to diagnoses using:',o:['Numbers 1–12','Letters A–L','CPT codes','ICD codes'],a:1,r:'Box 24E = letter pointers (A–L) to Box 21 diagnoses.'},
+{q:'Box
